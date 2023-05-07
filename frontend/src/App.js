@@ -1,5 +1,6 @@
 
 import {useState} from 'react'
+import Total from './Components/Total/Total';
 
 function App() {
 
@@ -17,9 +18,10 @@ function App() {
 
   
   return (
-    <div>
-      <button onClick={fetchData}>hey</button>
-
+    <div className=''>
+      <Total title = {"incomes"}/>
+      <Total  title = {"expenses"}/>
+      <Total title = {"total"}/>
     </div>
   );
 }
