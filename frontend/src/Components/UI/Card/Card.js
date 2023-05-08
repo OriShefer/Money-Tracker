@@ -2,11 +2,10 @@
 
 function Card(props) {
 
-    
     return (
-      <div className=''>
+      <div className={props.className}>
         {props.children}
-      </div>
+      </div >
     );
   }
   

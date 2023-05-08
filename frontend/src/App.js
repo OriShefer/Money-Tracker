@@ -1,6 +1,7 @@
 
 import {useState} from 'react'
-import Total from './Components/Total/Total';
+import Balance from './Components/Balance/Balance';
+
 
 function App() {
 
@@ -19,9 +20,7 @@ function App() {
   
   return (
     <div className=''>
-      <Total title = {"incomes"}/>
-      <Total  title = {"expenses"}/>
-      <Total title = {"total"}/>
+      <Balance/>
     </div>
   );
 }
