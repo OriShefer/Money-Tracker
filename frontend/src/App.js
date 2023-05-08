@@ -1,6 +1,7 @@
 
 import {useState} from 'react'
 import Balance from './Components/Balance/Balance';
+import Header from './Components/Header/Header';
 
 
 function App() {
@@ -20,6 +21,7 @@ function App() {
   
   return (
     <div className=''>
+      <Header/>
       <Balance/>
     </div>
   );

@@ -20,7 +20,7 @@ function Sum(props) {
       
 
   return (
-    <div className="card" style={{width: '18rem', backgroundColor: 'white', display: "inline-block", margin: "10px"}}>
+    <div className="card" style={{width: '18rem', backgroundColor: 'white', display: "inline-block", margin: "1rem"}}>
       <div className="card-body">
         <h5 className="card-title">{props.title}</h5>
         <p style={{color: textColor}} className= 'card-text'>
