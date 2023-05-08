@@ -1,5 +1,4 @@
 
-import Card from '../UI/Card/Card';
 import './Sum.css'
 
 function Sum(props) {

@@ -20,7 +20,7 @@ function App() {
 
   
   return (
-    <div className=''>
+    <div className='' style={{display: "flex"}}>
       <Header/>
       <Balance/>
     </div>
