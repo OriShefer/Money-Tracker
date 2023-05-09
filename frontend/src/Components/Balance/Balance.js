@@ -1,4 +1,4 @@
-import Sum from "../Total/Sum";
+import Sum from "../Sum/Sum";
 
 import "./Balance.css";
 

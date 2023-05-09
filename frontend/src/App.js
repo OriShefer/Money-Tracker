@@ -1,7 +1,8 @@
 
 import {useState} from 'react'
-import Balance from './Components/Balance/Balance';
-import Header from './Components/Header/Header';
+
+import Sidebar from './Components/Sidebar/Sidebar';
+import Content from './Components/Content/Content';
 
 
 function App() {
@@ -21,8 +22,8 @@ function App() {
   
   return (
     <div className='' style={{display: "flex"}}>
-      <Header/>
-      <Balance/>
+      <Sidebar/>
+     <Content/>
     </div>
   );
 }
