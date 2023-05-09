@@ -3,6 +3,8 @@ import axios from 'axios'
 
 
 const BASE_URL = "http://localhost:3000/api/";
+const INCOME = 'income'
+const EXPENSE = 'expense'
 
 
 const GlobalContext = React.createContext()
@@ -35,13 +37,31 @@ export const GlobalProvider = (props) => {
         setExpenseTotalAmount(totalAmount);
     }
 
+    const setTextColor = (type) => {
+    
+        type = type.toLowerCase();
+        let textColor = 'black';
+        if(type === INCOME){
+            textColor = "green";
+          }
+          if(type === EXPENSE){
+            textColor = "red";
+          }
+
+          return textColor;
+    }
+
 
     return (
         <GlobalContext.Provider value={{
             getIncome,
             incomeTotalAmount,
             getExpense,
-            expenseTotalAmount
+            expenseTotalAmount,
+            setTextColor,
+            INCOME,
+            EXPENSE
+
         }}>
             {props.children}
         </GlobalContext.Provider>

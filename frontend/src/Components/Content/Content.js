@@ -1,6 +1,7 @@
 
 import Balance from "../Balance/Balance";
 import Header from "../Header/Header";
+import LastTransactions from "../LastTransactions/LastTransactions";
 import "./Content.css";
 
 function Content() {
@@ -9,6 +10,7 @@ function Content() {
     <div className="content">
         <Header/>
         <Balance/>
+        <LastTransactions/>
     </div>
     
   );
