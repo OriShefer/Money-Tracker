@@ -1,12 +1,6 @@
-
-
-import { useGlobalContext } from '../../Context/GlobalContext';
 import './Transaction.css'
 
 function Transaction(props) {
-
-const {setTextColor} = useGlobalContext();
-
 
   return (
     <div>
