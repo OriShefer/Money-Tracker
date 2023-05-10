@@ -12,7 +12,8 @@ function LastTransactions() {
   }, []);
 
   return (
-    <div className="space card me-5">
+
+    <div className="space text-center card me-5">
       <div className="card-header">
         <LastTransactionHeader
           category={"Category"}
@@ -30,16 +31,6 @@ function LastTransactions() {
             />
           </li>
         ))}
-
-        {/* <li class="list-group-item">
-          <Transaction category={"ori"} type={"income"} amount={"100₪"} />
-        </li>
-        <li class="list-group-item">
-          <Transaction category={"ori"} type={"income"} amount={"100₪"} />
-        </li>
-        <li class="list-group-item">
-          <Transaction category={"ori"} type={"income"} amount={"100₪"} />
-        </li> */}
       </ul>
     </div>
   );

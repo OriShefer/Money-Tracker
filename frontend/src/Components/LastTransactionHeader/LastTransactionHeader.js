@@ -6,7 +6,7 @@ function LastTransactionHeader(props) {
 
 
   return (
-    <div>
+    <div className='last-transaction'>
       <label >{props.category}</label>
       <label>{props.type}</label >
       <label>{props.amount}</label >
