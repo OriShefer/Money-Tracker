@@ -3,6 +3,8 @@ import axios from 'axios'
 
 
 const BASE_URL = "http://localhost:3000/api/";
+const INCOME = 'income'
+const EXPENSE = 'expense'
 
 
 const GlobalContext = React.createContext()
@@ -11,6 +13,7 @@ export const GlobalProvider = (props) => {
 
     const [incomeTotalAmount, setIncomeTotalAmount] = useState([])
     const [expenseTotalAmount, setExpenseTotalAmount] = useState([])
+    const [lastTransactions,setLastTransactions] = useState([])
 
     const [error, setError] = useState([])
 
@@ -35,13 +38,52 @@ export const GlobalProvider = (props) => {
         setExpenseTotalAmount(totalAmount);
     }
 
+    const getLastTransactions = async () => {
+        const response = await axios.get(`${BASE_URL}get-last-transactions`)
+        .catch((err) =>{
+            setError(err.response.data.message)
+        });
+        console.log(response.data)
+        let transactions = response.data.map((item) => {
+            return ({
+               category: item.category,
+               type: item.type,
+               amount: item.amount
+        });
+            
+        })
+        setLastTransactions(transactions);
+    }
+
+
+
+    const setTextColor = (type) => {
+    
+        type = type.toLowerCase();
+        let textColor = 'black';
+        if(type === INCOME){
+            textColor = "green";
+          }
+          if(type === EXPENSE){
+            textColor = "red";
+          }
+
+          return textColor;
+    }
+
 
     return (
         <GlobalContext.Provider value={{
             getIncome,
             incomeTotalAmount,
             getExpense,
-            expenseTotalAmount
+            expenseTotalAmount,
+            getLastTransactions,
+            lastTransactions,
+            setTextColor,
+            INCOME,
+            EXPENSE
+
         }}>
             {props.children}
         </GlobalContext.Provider>

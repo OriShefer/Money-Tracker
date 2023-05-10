@@ -1,0 +1,15 @@
+th{
+    padding: 2rem;
+}
+
+.last-transactions{
+    margin-top: 5rem;
+    margin-left: 57rem;
+}
+
+.last-transactions label{
+    font-weight: bold;
+    color: black;
+    margin-bottom: 1rem;
+}
+
