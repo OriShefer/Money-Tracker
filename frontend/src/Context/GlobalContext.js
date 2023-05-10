@@ -52,8 +52,6 @@ export const GlobalProvider = (props) => {
         });
             
         })
-        console.log(transactions)
-
         setLastTransactions(transactions);
     }
 
