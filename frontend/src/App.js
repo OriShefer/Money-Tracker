@@ -21,7 +21,7 @@ function App() {
 
   
   return (
-    <div className='' style={{display: "flex"}}>
+    <div>
       <Sidebar/>
      <Content/>
     </div>

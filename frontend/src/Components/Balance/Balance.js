@@ -18,7 +18,7 @@ function Balance(props) {
   },[incomeTotalAmount,expenseTotalAmount])
 
   return (
-    <div style={{marginLeft: '15rem'}}>
+    <div style={{marginLeft: '5rem'}}>
       <Sum title={"Income"} amount={incomeTotalAmount} />
       <Sum title={"Expense"} amount={expenseTotalAmount} />
       <Sum title={"Total"} amount={total} />
