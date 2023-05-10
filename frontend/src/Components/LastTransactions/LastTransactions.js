@@ -14,7 +14,7 @@ function LastTransactions() {
   return (
     <div className="last-transactions">
       <label>Last Transactions</label>
-      <div className="card text-center" style={{ width: "30rem" }}>
+      <div className="card text-center" style={{ width: "30rem" , borderRadius: '1rem'}}>
         <table className="table">
           <thead>
             <tr>
