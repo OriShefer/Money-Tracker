@@ -6,11 +6,11 @@ function LastTransactionHeader(props) {
 
 
   return (
-    <div className='last-transaction'>
-      <label >{props.category}</label>
-      <label>{props.type}</label >
-      <label>{props.amount}</label >
-    </div>
+    <>
+      <th className='p-3' scope="col">{props.category}</th>
+      <th className='p-3' scope="col">{props.type}</th>
+      <th className='p-3' scope="col">{props.amount}</th>
+    </>
   );
 }
 
