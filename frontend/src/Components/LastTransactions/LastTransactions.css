@@ -3,8 +3,7 @@ th{
 }
 
 .last-transactions{
-    margin-top: 5rem;
-    margin-left: 57rem;    
+display: inline-block;    
 }
 
 .last-transactions label{

@@ -11,14 +11,35 @@ const GlobalContext = React.createContext()
 
 export const GlobalProvider = (props) => {
 
+    const [incomes,setIncomes] = useState([])
+    const [expenses,setExpenses] = useState([])
+
     const [incomeTotalAmount, setIncomeTotalAmount] = useState([])
     const [expenseTotalAmount, setExpenseTotalAmount] = useState([])
     const [lastTransactions,setLastTransactions] = useState([])
 
     const [error, setError] = useState([])
 
+    
+    const getIncomes = async () => {
+        const response = await axios.get(`${BASE_URL}get-incomes`)
+            .catch((err) =>{
+                setError(err.response.data.message)
+            });
+            setIncomes(response.data);
+    }
+
+    const getExpenses = async () => {
+        const response = await axios.get(`${BASE_URL}get-expenses`)
+            .catch((err) =>{
+                setError(err.response.data.message)
+            });
+            setExpenses(response.data);
+    }
+
+
     //calculate incomes
-    const getIncome = async () => {
+    const getIncomeAmount = async () => {
         const response = await axios.get(`${BASE_URL}get-incomes`)
             .catch((err) =>{
                 setError(err.response.data.message)
@@ -28,7 +49,7 @@ export const GlobalProvider = (props) => {
         setIncomeTotalAmount(totalAmount);
     }
 
-    const getExpense = async () => {
+    const getExpenseAmount = async () => {
         const response = await axios.get(`${BASE_URL}get-expenses`)
             .catch((err) =>{
                 setError(err.response.data.message)
@@ -57,6 +78,7 @@ export const GlobalProvider = (props) => {
 
 
 
+
     const setTextColor = (type) => {
     
         type = type.toLowerCase();
@@ -74,9 +96,13 @@ export const GlobalProvider = (props) => {
 
     return (
         <GlobalContext.Provider value={{
-            getIncome,
+            getIncomes,
+            incomes,
+            getExpenses,
+            expenses,
+            getIncomeAmount,
             incomeTotalAmount,
-            getExpense,
+            getExpenseAmount,
             expenseTotalAmount,
             getLastTransactions,
             lastTransactions,

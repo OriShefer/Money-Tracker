@@ -5,12 +5,12 @@ import { useGlobalContext } from '../../Context/GlobalContext';
 
 function Balance(props) {
 
-  const {getIncome,incomeTotalAmount,getExpense,expenseTotalAmount} = useGlobalContext();
+  const {getIncomeAmount,incomeTotalAmount,getExpenseAmount,expenseTotalAmount} = useGlobalContext();
   const [total,setTotal] = useState(0);
 
   useEffect(() => {
-    getIncome()
-    getExpense()
+    getIncomeAmount()
+    getExpenseAmount()
   },[])
 
   useEffect(() => {
