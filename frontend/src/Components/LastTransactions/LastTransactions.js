@@ -12,7 +12,7 @@ function LastTransactions() {
           amount={"Amount"}
         />
       </div>
-      <ul class="list-group list-group-flush">
+      <ul class="list-group">
         <li class="list-group-item">
           <Transaction category={"ori"} type={"income"} amount={"100₪"} />
         </li>
