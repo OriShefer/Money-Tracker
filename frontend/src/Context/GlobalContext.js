@@ -13,6 +13,7 @@ export const GlobalProvider = (props) => {
 
     const [incomeTotalAmount, setIncomeTotalAmount] = useState([])
     const [expenseTotalAmount, setExpenseTotalAmount] = useState([])
+    const [lastTransactions,setLastTransactions] = useState([])
 
     const [error, setError] = useState([])
 
@@ -37,6 +38,27 @@ export const GlobalProvider = (props) => {
         setExpenseTotalAmount(totalAmount);
     }
 
+    const getLastTransactions = async () => {
+        const response = await axios.get(`${BASE_URL}get-last-transactions`)
+        .catch((err) =>{
+            setError(err.response.data.message)
+        });
+        console.log(response.data)
+        let transactions = response.data.map((item) => {
+            return ({
+               category: item.category,
+               type: item.type,
+               amount: item.amount
+        });
+            
+        })
+        console.log(transactions)
+
+        setLastTransactions(transactions);
+    }
+
+
+
     const setTextColor = (type) => {
     
         type = type.toLowerCase();
@@ -58,6 +80,8 @@ export const GlobalProvider = (props) => {
             incomeTotalAmount,
             getExpense,
             expenseTotalAmount,
+            getLastTransactions,
+            lastTransactions,
             setTextColor,
             INCOME,
             EXPENSE
