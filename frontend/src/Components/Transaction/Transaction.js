@@ -7,12 +7,12 @@ function Transaction(props) {
 
   return (
     <tr>
-      <td className='p-3'>
+      <td className='p-4'>
         {/* <img src={process.env.PUBLIC_URL + 'img/user.png'} width="30rem" height="30rem"/> */}
         {props.category}
       </td>
-      <td className='p-3'>{props.type}</td >
-      <td className='p-3' style={{color: setTextColor(props.type)}}>{`${props.amount}₪`}</td >
+      <td className='p-4'>{props.type}</td >
+      <td className='p-4' style={{color: setTextColor(props.type)}}>{`${props.amount}₪`}</td >
     </tr>
   );
 }
