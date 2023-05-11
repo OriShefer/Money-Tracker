@@ -52,6 +52,15 @@ ChartJS.register(
     }
   };
 
+  const getMonthNum = (income) => {
+    const {date} = income
+    const fullDate = moment(date).format('MM');
+    const monthNumber = parseInt(fullDate)
+
+    return monthNumber - 1
+
+  } 
+
 
 function Chart() {
 
@@ -64,15 +73,41 @@ function Chart() {
     useEffect(() => {
         getIncomes()
         getExpenses()
+      },[])
 
+      useEffect(() => {
+        
         setIncomeMonthsAmount(prev => {
             return prev.map( (incomeMonth, i) => {
-                if(i == 1){
-                    return incomeMonth + 1;
-                }
+                let incomeMonthTotal = 0;
+                incomes.forEach((income) => {
+                    if(i == getMonthNum(income)){
+                        incomeMonthTotal += income.amount;
+                    }
+                })
+                return incomeMonth + incomeMonthTotal
             })
         })
-      },[])
+      },[incomes])
+
+      useEffect(() => {
+        setExpenseMonthsAmount(prev => {
+            return prev.map( (expenseMonth, i) => {
+                let expenseMonthTotal = 0;
+                expenses.forEach((expense) => {
+                    if(i == getMonthNum(expense)){
+                        expenseMonthTotal += expense.amount;
+                    }
+                })
+                return expenseMonth + expenseMonthTotal
+            })
+        })
+      },[expenses])
+
+
+      
+
+      
 
     const data = {
         labels: labels,
@@ -80,9 +115,7 @@ function Chart() {
             {
                 label: 'Income',
                 data: [
-                    ...incomeMonthsAmount.map((incomeMonth) => {
-                        return incomeMonth
-                    })
+                     ...incomeMonthsAmount
                 ],
                 backgroundColor: 'green',
                 tension: .2
@@ -90,10 +123,7 @@ function Chart() {
             {
                 label: 'Expenses',
                 data: [
-                    ...expenses.map((expense) => {
-                        const {amount} = expense
-                        return amount
-                    })
+                    ...expenseMonthsAmount
                 ],
                 backgroundColor: 'red',
                 tension: .2
@@ -104,7 +134,6 @@ function Chart() {
 
     return (
         <div className='chart'>
-            {console.log(incomeMonthsAmount)}
          <Bar options={options} data={data} />
         </div>
     )

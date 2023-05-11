@@ -1,6 +1,5 @@
 const TransactionSchema= require("../models/TransactionModel")
 
-
 exports.addTransaction = async (req, res) => {
     const {type ,title, amount,date, category, description}  = req.body
 
@@ -52,9 +51,19 @@ exports.getLastTransactions = async (req, res) =>{
 
 exports.deleteTransaction = async (req, res) =>{
     const {id} = req.params;
-    TransactionSchema.findByIdAndDelete(id)
+    await TransactionSchema.findByIdAndDelete(id)
         .then(() =>{
             res.status(200).json({message: 'Transaction Deleted'})
+        })
+        .catch(() =>{
+            res.status(500).json({message: 'Server Error'})
+        })
+}
+
+exports.deleteAllTransaction = async (req, res) =>{
+    await TransactionSchema.deleteMany()
+        .then(() =>{
+            res.status(200).json({message: 'Transactions Deleted'})
         })
         .catch(() =>{
             res.status(500).json({message: 'Server Error'})
