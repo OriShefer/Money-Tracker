@@ -6,7 +6,7 @@ function Transaction(props) {
   const {setTextColor} = useGlobalContext();
 
   return (
-    <tr key={Math.random()}>
+    <tr>
       <td className='p-3'>
         {/* <img src={process.env.PUBLIC_URL + 'img/user.png'} width="30rem" height="30rem"/> */}
         {props.category}

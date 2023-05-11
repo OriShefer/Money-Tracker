@@ -67,12 +67,15 @@ export const GlobalProvider = (props) => {
         console.log(response.data)
         let transactions = response.data.map((item) => {
             return ({
+                id: item._id,
                category: item.category,
                type: item.type,
                amount: item.amount
         });
             
         })
+        console.log(transactions)
+
         setLastTransactions(transactions);
     }
 

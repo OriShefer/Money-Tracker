@@ -27,7 +27,9 @@ function LastTransactions() {
           </thead>
           <tbody>
             {lastTransactions.map((item) => (
+              
               <Transaction
+                key = {item.id}
                 category={item.category}
                 type={item.type}
                 amount={item.amount}

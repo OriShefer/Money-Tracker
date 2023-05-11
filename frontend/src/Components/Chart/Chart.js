@@ -64,6 +64,14 @@ function Chart() {
     useEffect(() => {
         getIncomes()
         getExpenses()
+
+        setIncomeMonthsAmount(prev => {
+            return prev.map( (incomeMonth, i) => {
+                if(i == 1){
+                    return incomeMonth + 1;
+                }
+            })
+        })
       },[])
 
     const data = {
@@ -72,14 +80,8 @@ function Chart() {
             {
                 label: 'Income',
                 data: [
-                    ...incomes.map((income) => {
-                        const {date} = income
-                        const test = moment(date,'DD-MM-YYYY')
-                        const test2 = test.format('MM')
-                        const test3 = parseInt(test2)
-                       
-                        const {amount} = income
-                        return amount
+                    ...incomeMonthsAmount.map((incomeMonth) => {
+                        return incomeMonth
                     })
                 ],
                 backgroundColor: 'green',
@@ -102,6 +104,7 @@ function Chart() {
 
     return (
         <div className='chart'>
+            {console.log(incomeMonthsAmount)}
          <Bar options={options} data={data} />
         </div>
     )
