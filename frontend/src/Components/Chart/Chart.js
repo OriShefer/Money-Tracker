@@ -1,35 +1,65 @@
-import React, { useEffect } from 'react'
-import {Chart as ChartJs, 
+import React, { useEffect, useState } from 'react'
+import {
+    Chart as ChartJS,
     CategoryScale,
     LinearScale,
-    PointElement,
-    LineElement,
+    BarElement,
     Title,
     Tooltip,
     Legend,
-    ArcElement,
-} from 'chart.js'
+  } from 'chart.js';
 
-import {Line} from 'react-chartjs-2'
+import {Bar} from 'react-chartjs-2'
 import { useGlobalContext } from '../../Context/GlobalContext'
 import moment from 'moment'
 
 import './Chart.css'
 
-ChartJs.register(
+ChartJS.register(
     CategoryScale,
     LinearScale,
-    PointElement,
-    LineElement,
+    BarElement,
     Title,
     Tooltip,
-    Legend,
-    ArcElement,
-)
+    Legend
+  );
+
+
+
+  const labels = [ 'January',
+  'February',
+  'March',
+  'April',
+  'May',
+  'June',
+  'July',
+  'August',
+  'September',
+  'October',
+  'November',
+  'December'];
+
+  const  options = {
+    responsive: true,
+    plugins: {
+      legend: {
+        position: 'top',
+      },
+      title: {
+        display: true,
+        text: 'Chart.js Bar Chart'
+      }
+    }
+  };
+
 
 function Chart() {
 
+    const initalArray = Array(12).fill(0);
+
     const {getIncomes,incomes, getExpenses,expenses} = useGlobalContext()
+    const [incomeMonthsAmount,setIncomeMonthsAmount] = useState(initalArray)
+    const [expenseMonthsAmount,setExpenseMonthsAmount] = useState(initalArray)
 
     useEffect(() => {
         getIncomes()
@@ -37,15 +67,17 @@ function Chart() {
       },[])
 
     const data = {
-        labels: incomes.map((inc) =>{
-            const {date} = inc
-            return moment(date).format('DD/MM/YYYY')
-        }),
+        labels: labels,
         datasets: [
             {
                 label: 'Income',
                 data: [
                     ...incomes.map((income) => {
+                        const {date} = income
+                        const test = moment(date,'DD-MM-YYYY')
+                        const test2 = test.format('MM')
+                        const test3 = parseInt(test2)
+                       
                         const {amount} = income
                         return amount
                     })
@@ -70,7 +102,7 @@ function Chart() {
 
     return (
         <div className='chart'>
-         <Line data={data} />
+         <Bar options={options} data={data} />
         </div>
     )
 }
