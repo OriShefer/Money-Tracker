@@ -4,20 +4,21 @@ import './Saving.css'
 
 function Saving(props) {
 
+    const progressWidth = (props.currentAmount / props.destinationAmount) * 100
 
   return (
-    <div className="card me-5" style={{width: '30rem', backgroundColor: 'white', display: "inline-block", borderRadius: '1rem' }}>
+    <div className="card me-5" style={{width: '30rem',marginBottom:'2rem', backgroundColor: 'white', borderRadius: '1rem' }}>
         <div className="card-body">
-            <h5 style={{textAlign: 'right', marginRight:"1rem"}} className="card-title">test</h5>
+            <h5 style={{textAlign: 'right', marginRight:"1rem"}} className="card-title">{props.name}</h5>
             <div style={{ marginBottom:"1rem"}}>
-                <img className='saving-img' src={process.env.PUBLIC_URL + 'img/user.png'} style={{borderRadius: '1rem' }} />
+                <img className='saving-img' src={process.env.PUBLIC_URL + 'img/salary.png'} style={{borderRadius: '1rem' }} />
                 <div className='progress-content'>
-                    <h4 className= 'current-amount'>100₪</h4>
-                    <h4 className= 'destination-amount'>/200₪</h4>
+                    <h4 className= 'current-amount'>{props.currentAmount}₪</h4>
+                    <h4 className= 'destination-amount'>/{props.destinationAmount}₪</h4>
                     <div class="progress">
-                        <div class="progress-bar" role="progressbar" style={{width: "50%"}} aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
+                        <div class="progress-bar" role="progressbar" style={{width: `${progressWidth}%`}} aria-valuenow={progressWidth} aria-valuemin="0" aria-valuemax={props.destinationAmount}></div>
                     </div>
-                    <h4 className= 'goal'>50% of your goal</h4>
+                    <h4 className= 'goal'>{`${progressWidth}% of your goal`}</h4>
                 </div>
             </div>
         </div>

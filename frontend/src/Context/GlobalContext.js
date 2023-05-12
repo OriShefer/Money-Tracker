@@ -18,6 +18,8 @@ export const GlobalProvider = (props) => {
     const [expenseTotalAmount, setExpenseTotalAmount] = useState([])
     const [lastTransactions,setLastTransactions] = useState([])
 
+    const [lastSavings,setLastSavings] = useState([])
+
     const [error, setError] = useState([])
 
     
@@ -65,16 +67,36 @@ export const GlobalProvider = (props) => {
             setError(err.response.data.message)
         });
         console.log(response.data)
-        let transactions = response.data.map((item) => {
+        let transactions = response.data.map((transaction) => {
             return ({
-                id: item._id,
-               category: item.category,
-               type: item.type,
-               amount: item.amount
+                id: transaction._id,
+               category: transaction.category,
+               type: transaction.type,
+               amount: transaction.amount
         });
             
         })
         setLastTransactions(transactions);
+    }
+
+    const getLastSavings = async () => {
+        const response = await axios.get(`${BASE_URL}get-last-savings`)
+        .catch((err) =>{
+            setError(err.response.data.message)
+        });
+        console.log(response.data)
+        let savings = response.data.map((saving) => {
+            return ({
+                id: saving._id,
+                name: saving.name,
+                currentAmount: saving.currentAmount,
+                destinationAmount: saving.destinationAmount
+        });
+            
+        })
+        console.log(savings)
+
+        setLastSavings(savings);
     }
 
 
@@ -107,6 +129,8 @@ export const GlobalProvider = (props) => {
             expenseTotalAmount,
             getLastTransactions,
             lastTransactions,
+            getLastSavings,
+            lastSavings,
             setTextColor,
             INCOME,
             EXPENSE

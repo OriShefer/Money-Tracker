@@ -8,7 +8,7 @@ th{
     width: 40%;
 }
 
-.last-transactions label{
+.last-transactions-title{
     font-weight: bold;
     color: black;
     margin-bottom: 1rem;

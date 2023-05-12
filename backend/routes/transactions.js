@@ -13,7 +13,7 @@ router.post('/add-transaction', addTransaction)
     .get('/get-expenses',getExpenses)
 
     .post('/add-saving',addSaving)
-    .get('/get-savings',getLastSavings)
+    .get('/get-last-savings',getLastSavings)
     
 
 module.exports = router

@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { useGlobalContext } from "../../Context/GlobalContext";
 import LastTransactionHeader from "../LastTransactionHeader/LastTransactionHeader";
 import Transaction from "../Transaction/Transaction";
@@ -13,7 +13,7 @@ function LastTransactions() {
 
   return (
     <div className="last-transactions">
-      <label>Last Transactions</label>
+      <label className="last-transactions-title">Last Transactions</label>
       <div className="card text-center" style={{ width: "60%" , borderRadius: '1rem'}}>
         <table className="table">
           <thead>
@@ -26,13 +26,13 @@ function LastTransactions() {
             </tr>
           </thead>
           <tbody>
-            {lastTransactions.map((item) => (
+            {lastTransactions.map((transaction) => (
               
               <Transaction
-                key = {item.id}
-                category={item.category}
-                type={item.type}
-                amount={item.amount}
+                key = {transaction.id}
+                category={transaction.category}
+                type={transaction.type}
+                amount={transaction.amount}
               />
             ))}
           </tbody>
