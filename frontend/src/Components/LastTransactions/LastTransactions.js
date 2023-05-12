@@ -14,13 +14,14 @@ function LastTransactions() {
   return (
     <div className="last-transactions">
       <label className="last-transactions-title">Last Transactions</label>
-      <div className="card text-center" style={{ width: "60%" , borderRadius: '1rem'}}>
+      <div className="card text-center" style={{ width: "80%" , borderRadius: '1rem'}}>
         <table className="table">
           <thead>
             <tr>
               <LastTransactionHeader
                 category={"Category"}
                 type={"Type"}
+                date= {"Date"}
                 amount={"Amount"}
               />
             </tr>
@@ -33,6 +34,7 @@ function LastTransactions() {
                 category={transaction.category}
                 type={transaction.type}
                 amount={transaction.amount}
+                date = {transaction.date}
               />
             ))}
           </tbody>

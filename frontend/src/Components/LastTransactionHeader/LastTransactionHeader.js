@@ -9,6 +9,7 @@ function LastTransactionHeader(props) {
     <>
       <th className='p-4' scope="col">{props.category}</th>
       <th className='p-4' scope="col">{props.type}</th>
+      <th className='p-4' scope="col">{props.date}</th>
       <th className='p-4' scope="col">{props.amount}</th>
     </>
   );

@@ -72,7 +72,8 @@ export const GlobalProvider = (props) => {
                 id: transaction._id,
                category: transaction.category,
                type: transaction.type,
-               amount: transaction.amount
+               amount: transaction.amount,
+               date: transaction.date
         });
             
         })
