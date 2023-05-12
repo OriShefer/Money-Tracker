@@ -1,0 +1,35 @@
+.saving-img{
+    width:6rem;
+    height:6rem;
+    padding: 2rem;
+    background-color: rgb(0, 217, 255);
+    margin-right: 1rem;
+    margin-bottom: 1rem;
+    float: left;
+}
+
+.progress-content{
+    display: inline-block;
+    width: 70%;
+
+}
+
+.current-amount{
+    color: blue;
+    font-size: 1.2rem;
+    display: inline-block;
+}
+
+.destination-amount{
+    color: gray;
+    font-size: 1rem;
+    display: inline-block;
+
+}
+
+.goal{
+    color: rgb(56, 54, 54);
+    font-size: 1rem;
+    display: inline-block;
+    margin-top: 1rem;
+}
