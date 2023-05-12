@@ -44,8 +44,15 @@ const options = {
   plugins: {
     legend: {
       position: "top",
-    }
-  }
+    },
+  },
+  scales: {
+    x: {
+      grid: {
+        display: false,
+      },
+    },
+  },
 };
 
 const getMonthNum = (income) => {
@@ -121,8 +128,12 @@ function Chart() {
   };
 
   return (
-    <div className="chart">
-      <Bar options={options} data={data} />
+    <div style={{ marginLeft: "5rem", marginTop: "2rem" }}>
+      <label className="chart-title">Total Chart</label>
+      <div className="chart card">
+        <Bar options={options} data={data} />
+      </div>
+    
     </div>
   );
 }

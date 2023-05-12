@@ -3,8 +3,9 @@ th{
 }
 
 .last-transactions{
-    margin-top: 2rem;
     float:right;
+    margin-top: 1rem;
+    margin-right: 7rem;
     width: 40%;
 }
 

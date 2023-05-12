@@ -1,11 +1,14 @@
 .chart{
-    display: inline-block;
-    border: 2px solid #FFFFFF;
     box-shadow: 0px 1px 15px rgba(0, 0, 0, 0.06);
+    padding: 1rem;
     height: auto;
     width: 45%;
-    margin-left: 5rem;
-    margin-top: 3rem;
-    
+}
 
+
+.chart-title{
+
+    font-weight: bold;
+    color: black;
+    margin-bottom: 1rem;
 }

@@ -40,7 +40,7 @@ exports.getTransactions = async (req, res) =>{
 
 exports.getLastTransactions = async (req, res) =>{
     try {
-        const transactions = await TransactionSchema.find().sort({createdAt: -1}).limit(3)
+        const transactions = await TransactionSchema.find().sort({createdAt: -1}).limit(5)
         res.status(200).json(transactions)
     } catch (error) {
         res.status(500).json({message: 'Server Error'})
