@@ -31,7 +31,7 @@ export const GlobalProvider = (props) => {
             setIncomes(response.data);
     }
 
-    const getExpenses = async () => {
+    const getExpenses =  async () => {
         const response = await axios.get(`${BASE_URL}get-expenses`)
             .catch((err) =>{
                 setError(err.response.data.message)
