@@ -40,7 +40,6 @@ export const GlobalProvider = (props) => {
     }
 
 
-    //calculate incomes
     const getIncomeAmount = async () => {
         const response = await axios.get(`${BASE_URL}get-incomes`)
             .catch((err) =>{

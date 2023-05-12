@@ -6,7 +6,7 @@ function CategorySum(props) {
 
   return (
     <div style={{margin:'1.3rem 0'}}>
-        <div style={{margin:'0.2rem'}}>
+        <div style={{margin:'0.2rem', display:'flex',justifyContent: 'space-between'}}>
         <label className='category-sum-category'>Food And Drinks</label>
         <label className='category-sum-amount'>872</label>
         </div>
