@@ -9,17 +9,58 @@ import { useGlobalContext } from '../../Context/GlobalContext';
 function AllCategorySum(props) {
   const incomeState = 'Where your money is?'
   const expenseState = 'Where your money go?'
+  const hashMapIncomes = new Map();
+  const hashMapExpenses = new Map();
+  let content = <div></div>;
 
-  const {getIncomes,getExpenses} = useGlobalContext()
+  const {getIncomes,incomes,getExpenses,expenses} = useGlobalContext()
   
-    const [title,setTitle] = useState(expenseState);
-  
+  const [title,setTitle] = useState(expenseState);
+
     const changeTitle = (event) => {
       setTitle(event.target.value)
       if(event.target.value === incomeState){
         getIncomes()
+
+        incomes.forEach(income => {
+          if(hashMapIncomes.has(income.category)){
+            const totalAmount = hashMapIncomes.get(income.category) + income.amount
+            hashMapIncomes.set(income.category,totalAmount)
+          }else{
+            hashMapIncomes.set(income.category,income.amount)
+          }
+        });
+
+        content = hashMapIncomes.forEach((value,key) => {
+          <CategorySum
+          category = {key}
+          amount = {value}
+          />
+        })
+
+        console.log(hashMapIncomes)
+
       }else{
         getExpenses()
+
+        expenses.forEach(expense => {
+          if(hashMapExpenses.has(expense.category)){
+            const totalAmount = hashMapExpenses.get(expense.category) + expense.amount
+            hashMapExpenses.set(expense.category,totalAmount)
+          }else{
+            hashMapExpenses.set(expense.category,expense.amount)
+          }
+        });
+
+        content = hashMapExpenses.forEach((value,key) => {
+          <CategorySum
+          category = {key}
+          amount = {value}
+          />
+        })
+
+        console.log(hashMapExpenses)
+
       }
 
     }
@@ -34,10 +75,7 @@ function AllCategorySum(props) {
         title = {title}
         changeTitle = {changeTitle}
         />
-        <CategorySum/>
-        <CategorySum/>
-        <CategorySum/>
-
+        {content}
      </div>
     </div>
   );
