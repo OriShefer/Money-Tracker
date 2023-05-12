@@ -15,8 +15,8 @@ function Saving(props) {
                 <div className='progress-content'>
                     <h4 className= 'current-amount'>{props.currentAmount}₪</h4>
                     <h4 className= 'destination-amount'>/{props.destinationAmount}₪</h4>
-                    <div class="progress">
-                        <div class="progress-bar" role="progressbar" style={{width: `${progressWidth}%`}} aria-valuenow={progressWidth} aria-valuemin="0" aria-valuemax={props.destinationAmount}></div>
+                    <div className="progress">
+                        <div className="progress-bar" role="progressbar" style={{width: `${progressWidth}%`}} aria-valuenow={progressWidth} aria-valuemin="0" aria-valuemax={props.destinationAmount}></div>
                     </div>
                     <h4 className= 'goal'>{`${progressWidth}% of your goal`}</h4>
                 </div>
