@@ -1,7 +1,9 @@
 import { useGlobalContext } from '../../Context/GlobalContext';
-import './Transaction.css'
+
 import moment from "moment";
 import 'moment/locale/en-il';
+
+import './Transaction.css'
 
 
 function Transaction(props) {

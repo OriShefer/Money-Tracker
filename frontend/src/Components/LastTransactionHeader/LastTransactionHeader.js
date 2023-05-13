@@ -1,9 +1,6 @@
-
-
 import './LastTransactionHeader.css'
 
 function LastTransactionHeader(props) {
-
 
   return (
     <>

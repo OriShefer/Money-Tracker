@@ -2,14 +2,14 @@
     margin-left: 15rem;
 }
 
-.stats-con{
+.chart-stats-con{
     display: grid;
         grid-template-columns: repeat(5, 1fr);
         gap: 1rem;
         margin-left: 5rem;
         margin-top: 2rem;
 }
-.extra-con{
+.saving-last-con{
     display: grid;
     grid-template-columns: repeat(4,1fr);
     gap: 2rem;

@@ -1,5 +1,3 @@
-
-
 import './Saving.css'
 
 function Saving(props) {
@@ -7,11 +5,11 @@ function Saving(props) {
     const progressWidth = (props.currentAmount / props.destinationAmount) * 100
 
   return (
-    <div className="card me-5" style={{width: '30rem',marginBottom:'2rem', backgroundColor: 'white', borderRadius: '1rem' }}>
+    <div className="saving-card card me-5">
         <div className="card-body">
-            <h5 style={{textAlign: 'right', marginRight:"1rem"}} className="card-title">{props.name}</h5>
+            <h5 className="saving-title card-title">{props.name}</h5>
             <div style={{ marginBottom:"1rem"}}>
-                <img className='saving-img' src={process.env.PUBLIC_URL + 'img/salary.png'} style={{borderRadius: '1rem' }} />
+                <img className='saving-img' src={process.env.PUBLIC_URL + 'img/salary.png'} />
                 <div className='progress-content'>
                     <h4 className= 'current-amount'>{props.currentAmount}₪</h4>
                     <h4 className= 'destination-amount'>/{props.destinationAmount}₪</h4>

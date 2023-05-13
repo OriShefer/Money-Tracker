@@ -1,16 +1,18 @@
 import { useEffect, useState } from "react";
-import CategorySum from "../CategorySum/CategorySum";
-import "./AllCategorySum.css";
-import RadioButton from "../RadioButton/RadioButton";
 import { useGlobalContext } from "../../Context/GlobalContext";
 
-function AllCategorySum(props) {
+import CategorySum from "../CategorySum/CategorySum";
+import RadioButton from "../RadioButton/RadioButton";
+
+import "./Statistics.css";
+
+function Statistics() {
   const incomeState = "Where your money is?";
   const expenseState = "Where your money go?";
-  const start = 'What you want to see?'
+  const start = 'What you want to see?';
  
   const [title, setTitle] = useState(start);
-  const [firstTime,setFirstTime] = useState(true)
+  const [firstTime,setFirstTime] = useState(true) //first render problem
 
   const { getIncomesByCategoryAmount, incomesByCategoryAmount, getExpensesByCategoryAmount, expensesByCategoryAmount } = useGlobalContext();
   const [content,setContent] = useState()
@@ -55,8 +57,8 @@ function AllCategorySum(props) {
 
   return (
     <div>
-         <label className="chart-title">Statistics</label>
-         <div className="card" style={{ width: "30rem",gridColumn:' 4 / -1', height: "26.1rem"}}>
+         <label className="statistics-title">Statistics</label>
+         <div className="statistics-card card">
             <div className="card-body">
                   <h5 className="card-title" style={{ display: "inline-block" }}>
                     {title}
@@ -69,11 +71,10 @@ function AllCategorySum(props) {
                   />
                   {content}
             </div>
-    </div>
-          
+          </div>    
     </div>
     
   );
 }
 
-export default AllCategorySum;
+export default Statistics;

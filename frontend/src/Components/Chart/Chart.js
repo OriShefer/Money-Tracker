@@ -128,7 +128,7 @@ function Chart() {
   };
 
   return (
-    <div style={{ gridColumn: '1/4', height:'20rem', width:'50rem'}}>
+    <div className="total-chart-div">
       <label className="chart-title">Total Chart</label>
       <div className="chart card">
         <Bar options={options} data={data} />

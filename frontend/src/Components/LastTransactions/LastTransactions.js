@@ -1,7 +1,9 @@
 import { useEffect } from "react";
 import { useGlobalContext } from "../../Context/GlobalContext";
+
 import LastTransactionHeader from "../LastTransactionHeader/LastTransactionHeader";
 import Transaction from "../Transaction/Transaction";
+
 import "./LastTransactions.css";
 
 function LastTransactions() {
@@ -14,7 +16,7 @@ function LastTransactions() {
   return (
     <div className="last-transactions">
       <label className="last-transactions-title">Last Transactions</label>
-      <div className="card text-center" style={{ width: "80%" , borderRadius: '1rem'}}>
+      <div className="card text-center">
         <table className="table">
           <thead>
             <tr>

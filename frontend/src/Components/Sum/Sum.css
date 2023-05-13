@@ -1,1 +1,6 @@
-
+.sum{
+    width: 18rem;
+    background-color: white;
+    display: inline-block;
+    border-radius: 1rem
+}

@@ -1,0 +1,11 @@
+.statistics-title{
+    font-weight: bold;
+    color: black;
+    margin-bottom: 1rem;
+}
+
+.statistics-card{
+    width: 30rem;
+    grid-column:4 / -1;
+    height: 26.1rem;
+}

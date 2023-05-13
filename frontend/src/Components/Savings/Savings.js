@@ -1,9 +1,10 @@
-
-
 import { useEffect } from 'react';
 import { useGlobalContext } from '../../Context/GlobalContext';
+
 import Saving from '../Saving/Saving';
-import './Savings.css'
+
+import './Savings.css';
+
 
 function Savings() {
 
@@ -14,7 +15,7 @@ function Savings() {
     }, []);
 
   return (
-    <div style={{}}>
+    <div>
         <label className='saving-title'>Your Savings</label>
         {lastSavings.map((saving) => (
             <Saving
