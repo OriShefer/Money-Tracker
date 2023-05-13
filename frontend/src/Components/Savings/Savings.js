@@ -14,7 +14,7 @@ function Savings() {
     }, []);
 
   return (
-    <div style={{margin: '5rem',marginTop: '7rem', float:'left'}}>
+    <div style={{}}>
         <label className='saving-title'>Your Savings</label>
         {lastSavings.map((saving) => (
             <Saving

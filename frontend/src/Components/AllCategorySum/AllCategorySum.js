@@ -13,13 +13,8 @@ function AllCategorySum(props) {
   const [firstTime,setFirstTime] = useState(true)
 
   const { getIncomesByCategoryAmount, incomesByCategoryAmount, getExpensesByCategoryAmount, expensesByCategoryAmount } = useGlobalContext();
-  const [content,setContent] = useState(expensesByCategoryAmount.map((category) => (
-    <CategorySum
-    key = {category._id}
-    category = {category._id}
-    amount = {category.totalQuantity}
-    />
-  )));
+  const [content,setContent] = useState()
+
 
   useEffect(() => {
 
@@ -56,23 +51,28 @@ function AllCategorySum(props) {
     setTitle(event.target.value);
   };
 
-  
+
 
   return (
-    <div className="card" style={{ width: "30rem" }}>
-      <div className="card-body">
-        <h5 className="card-title" style={{ display: "inline-block" }}>
-          {title}
-        </h5>
-        <RadioButton
-          incomeState={incomeState}
-          expenseState={expenseState}
-          title={title}
-          changeTitle={changeTitle}
-        />
-        {content}
-      </div>
+    <div>
+         <label className="chart-title">Statistics</label>
+         <div className="card" style={{ width: "30rem",gridColumn:' 4 / -1', height: "26.1rem"}}>
+            <div className="card-body">
+                  <h5 className="card-title" style={{ display: "inline-block" }}>
+                    {title}
+                  </h5>
+                  <RadioButton
+                    incomeState={incomeState}
+                    expenseState={expenseState}
+                    title={title}
+                    changeTitle={changeTitle}
+                  />
+                  {content}
+            </div>
     </div>
+          
+    </div>
+    
   );
 }
 

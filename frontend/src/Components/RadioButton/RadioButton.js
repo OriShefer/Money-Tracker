@@ -2,8 +2,6 @@
 
 function RadioButton(props) {
     
-   
-  
   return (
     <div style={{float:'right'}}>
         <div className="form-check form-check-inline">

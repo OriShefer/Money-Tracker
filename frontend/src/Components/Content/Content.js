@@ -13,10 +13,15 @@ function Content() {
     <div className="content">
         <Header/>
         <Balance/>
+        <div className="stats-con">
         <Chart/>
-        <AllCategorySum/>
-        <LastTransactions/>
+        <AllCategorySum/>  
+        </div>
+         <div className="extra-con">
         <Savings/>
+        <LastTransactions/>
+          </div>    
+        
     </div>
     
   );
