@@ -80,10 +80,44 @@ exports.getIncomes = async (req,res) => {
     }
 }
 
+exports.getIncomesByCategoryAmount = async (req,res) => {
+
+    try {
+        const incomes = await TransactionSchema.aggregate([
+            {
+                $match: {type: "income"}
+            },
+                {
+                    $group: {_id: "$category", totalQuantity: {$sum: "$amount"}}
+                }
+        ]).limit(8)
+        res.status(200).json(incomes)
+    } catch (error) {
+        res.status(500).json({message: 'Server Error'})
+    }
+}
+
 exports.getExpenses = async (req,res) => {
 
     try {
         const expenses = await TransactionSchema.find({type: 'expense'}).sort({createdAt: -1})
+        res.status(200).json(expenses)
+    } catch (error) {
+        res.status(500).json({message: 'Server Error'})
+    }
+}
+
+exports.getExpensesByCategoryAmount = async (req,res) => {
+
+    try {
+        const expenses = await TransactionSchema.aggregate([
+            {
+                $match: {type: "expense"}
+            },
+                {
+                    $group: {_id: "$category", totalQuantity: {$sum: "$amount"}}
+                }
+        ])
         res.status(200).json(expenses)
     } catch (error) {
         res.status(500).json({message: 'Server Error'})

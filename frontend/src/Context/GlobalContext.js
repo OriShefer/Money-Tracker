@@ -16,6 +16,10 @@ export const GlobalProvider = (props) => {
 
     const [incomeTotalAmount, setIncomeTotalAmount] = useState([])
     const [expenseTotalAmount, setExpenseTotalAmount] = useState([])
+
+    const [incomesByCategoryAmount, setIncomesByCategoryAmount] = useState([])
+    const [expensesByCategoryAmount, setExpensesByCategoryAmount] = useState([])
+
     const [lastTransactions,setLastTransactions] = useState([])
 
     const [lastSavings,setLastSavings] = useState([])
@@ -60,12 +64,27 @@ export const GlobalProvider = (props) => {
         setExpenseTotalAmount(totalAmount);
     }
 
+    const getIncomesByCategoryAmount = async () => {
+        const response = await axios.get(`${BASE_URL}get-incomes-category`)
+            .catch((err) =>{
+                setError(err.response.data.message)
+            });
+        setIncomesByCategoryAmount(response.data);
+    }
+    
+    const getExpensesByCategoryAmount = async () => {
+        const response = await axios.get(`${BASE_URL}get-expenses-category`)
+            .catch((err) =>{
+                setError(err.response.data.message)
+            });
+        setExpensesByCategoryAmount(response.data);
+    }
+
     const getLastTransactions = async () => {
         const response = await axios.get(`${BASE_URL}get-last-transactions`)
         .catch((err) =>{
             setError(err.response.data.message)
         });
-        console.log(response.data)
         let transactions = response.data.map((transaction) => {
             return ({
                 id: transaction._id,
@@ -84,7 +103,6 @@ export const GlobalProvider = (props) => {
         .catch((err) =>{
             setError(err.response.data.message)
         });
-        console.log(response.data)
         let savings = response.data.map((saving) => {
             return ({
                 id: saving._id,
@@ -94,8 +112,6 @@ export const GlobalProvider = (props) => {
         });
             
         })
-        console.log(savings)
-
         setLastSavings(savings);
     }
 
@@ -127,6 +143,10 @@ export const GlobalProvider = (props) => {
             incomeTotalAmount,
             getExpenseAmount,
             expenseTotalAmount,
+            getIncomesByCategoryAmount,
+            incomesByCategoryAmount,
+            getExpensesByCategoryAmount,
+            expensesByCategoryAmount,
             getLastTransactions,
             lastTransactions,
             getLastSavings,

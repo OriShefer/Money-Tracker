@@ -7,58 +7,56 @@ import { useGlobalContext } from "../../Context/GlobalContext";
 function AllCategorySum(props) {
   const incomeState = "Where your money is?";
   const expenseState = "Where your money go?";
-  const hashMapIncomes = new Map();
-  const hashMapExpenses = new Map();
-  const [content, setContent] = useState();
-  const [title, setTitle] = useState();
+  const start = 'What you want to see?'
+ 
+  const [title, setTitle] = useState(start);
+  const [firstTime,setFirstTime] = useState(true)
 
-  const { getIncomes, incomes, getExpenses, expenses } = useGlobalContext();
+  const { getIncomesByCategoryAmount, incomesByCategoryAmount, getExpensesByCategoryAmount, expensesByCategoryAmount } = useGlobalContext();
+  const [content,setContent] = useState(expensesByCategoryAmount.map((category) => (
+    <CategorySum
+    key = {category._id}
+    category = {category._id}
+    amount = {category.totalQuantity}
+    />
+  )));
 
   useEffect(() => {
-  },[])
+
+    if(title === incomeState || firstTime){
+      getIncomesByCategoryAmount();
+      setContent(incomesByCategoryAmount.map((category) => (
+        <CategorySum
+        key = {category._id}
+        category = {category._id}
+        amount = {category.totalQuantity}
+        />
+      )))
+
+    }
+    
+    if(title === expenseState || firstTime){
+      getExpensesByCategoryAmount();
+      setContent(expensesByCategoryAmount.map((category) => (
+        <CategorySum
+        key = {category._id}
+        category = {category._id}
+        amount = {category.totalQuantity}
+        />
+      )))
+    }
+
+    setFirstTime(false)
+
+
+  },[title])
+
 
   const changeTitle = (event) => {
     setTitle(event.target.value);
-
-    if (event.target.value === incomeState) {
-      getIncomes();
-
-      incomes.forEach((income) => {
-        if (hashMapIncomes.has(income.category)) {
-          const totalAmount =
-            hashMapIncomes.get(income.category) + income.amount;
-          hashMapIncomes.set(income.category, totalAmount);
-        } else {
-          hashMapIncomes.set(income.category, income.amount);
-        }
-      });
-
-      const array = Array.from(hashMapIncomes, ([key, value]) => ({ key, value }));
-
-      setContent(array.map(({ key, value }) => (
-        <CategorySum key = {key} category={key} amount={value} />
-      )))
-
-    } else {
-      getExpenses();
-
-      expenses.forEach((expense) => {
-        if (hashMapExpenses.has(expense.category)) {
-          const totalAmount =
-            hashMapExpenses.get(expense.category) + expense.amount;
-          hashMapExpenses.set(expense.category, totalAmount);
-        } else {
-          hashMapExpenses.set(expense.category, expense.amount);
-        }
-      });
-
-       const array = Array.from(hashMapExpenses, ([key, value]) => ({ key, value }));
-      
-      setContent(array.map(({ key, value }) => (
-        <CategorySum key = {key} category={key} amount={value} />
-      )))
-    }
   };
+
+  
 
   return (
     <div className="card" style={{ width: "30rem" }}>

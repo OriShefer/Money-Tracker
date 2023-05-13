@@ -1,6 +1,6 @@
 
+import AllCategorySum from "../AllCategorySum/AllCategorySum";
 import Balance from "../Balance/Balance";
-import CategorySum from "../AllCategorySum/AllCategorySum";
 import Chart from "../Chart/Chart";
 import Header from "../Header/Header";
 import LastTransactions from "../LastTransactions/LastTransactions";
@@ -14,7 +14,7 @@ function Content() {
         <Header/>
         <Balance/>
         <Chart/>
-        <CategorySum/>
+        <AllCategorySum/>
         <LastTransactions/>
         <Savings/>
     </div>
