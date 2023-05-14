@@ -1,12 +1,14 @@
 import Sidebar from './Components/Sidebar/Sidebar';
 import Content from './Components/Content/Content';
+import TransactionsPage from './Components/TransactionsPage/TransactionsPage';
 
 
 function App() {
   return (
     <div>
       <Sidebar/>
-     <Content/>
+      <TransactionsPage/>
+     {/* <Content/> */}
     </div>
   );
 }
