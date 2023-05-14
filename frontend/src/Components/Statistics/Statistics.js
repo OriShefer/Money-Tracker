@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useLayoutEffect, useState } from "react";
 import { useGlobalContext } from "../../Context/GlobalContext";
 
 import CategorySum from "../CategorySum/CategorySum";
@@ -18,6 +18,7 @@ function Statistics() {
   const [content,setContent] = useState()
 
 
+
   useEffect(() => {
 
     if(title === incomeState || firstTime){
@@ -31,7 +32,8 @@ function Statistics() {
       )))
 
     }
-    
+
+
     if(title === expenseState || firstTime){
       getExpensesByCategoryAmount();
       setContent(expensesByCategoryAmount.map((category) => (
@@ -45,13 +47,14 @@ function Statistics() {
 
     setFirstTime(false)
 
-
   },[title])
 
 
   const changeTitle = (event) => {
     setTitle(event.target.value);
   };
+
+  
 
 
 
