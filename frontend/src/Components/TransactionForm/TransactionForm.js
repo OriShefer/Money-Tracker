@@ -75,7 +75,7 @@ function TransactionsForm() {
               <div className="col-md-4 mb-3">
                 <label htmlFor="Category">Category</label>
                 <select onChange={(e) => dispatch({ type: 'changeCategory', payload: e.target.value})} className="custom-select d-block w-100" id="Category" value={state.category} required="">
-                  <option value="">Choose...</option>
+                  <option>Choose...</option>
                   <option>United States</option>
                 </select>
                 <div className="invalid-feedback">
