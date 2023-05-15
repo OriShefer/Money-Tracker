@@ -9,10 +9,8 @@ import "./Statistics.css";
 function Statistics() {
   const incomeState = "Where your money is?";
   const expenseState = "Where your money go?";
-  const start = 'What you want to see?';
  
-  const [title, setTitle] = useState(start);
-  const [firstTime,setFirstTime] = useState(true) //first render problem
+  const [title, setTitle] = useState(incomeState);
 
   const { getIncomesByCategoryAmount, incomesByCategoryAmount, getExpensesByCategoryAmount, expensesByCategoryAmount } = useGlobalContext();
   const [content,setContent] = useState()
@@ -21,33 +19,39 @@ function Statistics() {
 
   useEffect(() => {
 
-    if(title === incomeState || firstTime){
+    if(title === incomeState ){ 
       getIncomesByCategoryAmount();
-      setContent(incomesByCategoryAmount.map((category) => (
-        <CategorySum
-        key = {category._id}
-        category = {category._id}
-        amount = {category.totalQuantity}
-        />
-      )))
-
+        console.log(incomesByCategoryAmount)
+     
     }
 
-
-    if(title === expenseState || firstTime){
+    if(title === expenseState){
       getExpensesByCategoryAmount();
-      setContent(expensesByCategoryAmount.map((category) => (
-        <CategorySum
-        key = {category._id}
-        category = {category._id}
-        amount = {category.totalQuantity}
-        />
-      )))
+  
     }
 
-    setFirstTime(false)
 
   },[title])
+
+useEffect(() => {
+  setContent(incomesByCategoryAmount.map((category) => (
+    <CategorySum
+    key = {category._id}
+    category = {category._id}
+    amount = {category.totalQuantity}
+    />)
+    ))
+}, [incomesByCategoryAmount])
+
+useEffect(() => {
+  setContent(expensesByCategoryAmount.map((category) => (
+    <CategorySum
+    key = {category._id}
+    category = {category._id}
+    amount = {category.totalQuantity}
+    />
+  )))
+}, [expensesByCategoryAmount])
 
 
   const changeTitle = (event) => {
