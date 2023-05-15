@@ -13,45 +13,41 @@ function Statistics() {
   const [title, setTitle] = useState(incomeState);
 
   const { getIncomesByCategoryAmount, incomesByCategoryAmount, getExpensesByCategoryAmount, expensesByCategoryAmount } = useGlobalContext();
-  const [content,setContent] = useState()
-
+  const [content,setContent] = useState([])
 
 
   useEffect(() => {
-
-    if(title === incomeState ){ 
-      getIncomesByCategoryAmount();
-        console.log(incomesByCategoryAmount)
-     
-    }
-
-    if(title === expenseState){
+      getIncomesByCategoryAmount();     
       getExpensesByCategoryAmount();
+  },[])
+
+useEffect(() => {
+  if(title === incomeState)
+  {
+    setContent(incomesByCategoryAmount.map((category) => (
+      <CategorySum
+      key = {category._id}
+      category = {category._id}
+      amount = {category.totalQuantity}
+      />)
+      ))
+  }
+
+}, [incomesByCategoryAmount,title])
+
+useEffect(() => {
+  if(title === expenseState){
+    setContent(expensesByCategoryAmount.map((category) => (
+      <CategorySum
+      key = {category._id}
+      category = {category._id}
+      amount = {category.totalQuantity}
+      />
+    )))
+  }
+
   
-    }
-
-
-  },[title])
-
-useEffect(() => {
-  setContent(incomesByCategoryAmount.map((category) => (
-    <CategorySum
-    key = {category._id}
-    category = {category._id}
-    amount = {category.totalQuantity}
-    />)
-    ))
-}, [incomesByCategoryAmount])
-
-useEffect(() => {
-  setContent(expensesByCategoryAmount.map((category) => (
-    <CategorySum
-    key = {category._id}
-    category = {category._id}
-    amount = {category.totalQuantity}
-    />
-  )))
-}, [expensesByCategoryAmount])
+}, [title])
 
 
   const changeTitle = (event) => {
