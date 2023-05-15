@@ -11,8 +11,8 @@ function RadioButton(props) {
                   </label>
                 </div>
                 <div className="form-check form-check-inline">
-                  <input onLoad={props.changeTitle} onChange={props.changeTitle} className="form-check-input" type="radio" value={props.expenseState} checked={props.title === props.expenseState} />
-                  <label className="form-check-label" >
+                  <input onLoad={props.changeTitle} onChange={props.changeTitle} className="form-check-input" id="expense" type="radio" value={props.expenseState} checked={props.title === props.expenseState} />
+                  <label className="form-check-label"  htmlFor="expense">
                     Expenses
                   </label>
                 </div>
