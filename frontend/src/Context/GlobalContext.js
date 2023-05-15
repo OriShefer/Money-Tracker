@@ -98,6 +98,14 @@ export const GlobalProvider = (props) => {
         setLastTransactions(transactions);
     }
 
+    const addTransaction = async (body) => {
+        const response = await axios.post(`${BASE_URL}add-transaction`, body)
+        .catch((err) =>{
+            setError(err.response.data.message)
+        });
+
+    }
+
     const getLastSavings = async () => {
         const response = await axios.get(`${BASE_URL}get-last-savings`)
         .catch((err) =>{
@@ -149,6 +157,7 @@ export const GlobalProvider = (props) => {
             expensesByCategoryAmount,
             getLastTransactions,
             lastTransactions,
+            addTransaction,
             getLastSavings,
             lastSavings,
             setTextColor,

@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useGlobalContext } from "../../Context/GlobalContext";
 import "./TransactionsPage.css";
 import TransactionsForm from "../TransactionForm/TransactionForm";
@@ -7,9 +7,16 @@ function TransactionsPage() {
 
   const {getIncomeAmount,incomeTotalAmount,getExpenseAmount,expenseTotalAmount,setTextColor} = useGlobalContext();
 
+  const [added,setAdded] = useState(false)
+
   useEffect(() => {
     getIncomeAmount()
-  },[])
+ 
+  },[added])
+
+  useEffect(() => {
+
+  },[incomeTotalAmount])
 
   return (
   <div className="card me-5 transactions-page">
@@ -19,11 +26,13 @@ function TransactionsPage() {
           <div className="card me-5 ">
           <div style={{textAlign:"center"}} className="card-body ">
             Total Income: 
-            <span style={{color: setTextColor('income'), fontWeight:'bold'}}> $0</span>
+            <span style={{color: setTextColor('income'), fontWeight:'bold'}}> {incomeTotalAmount}₪</span>
           </div>
           </div>
         </div>
-        <TransactionsForm/>
+        <TransactionsForm
+        setAdded = {setAdded}
+        />
       </div>
   </div>
   );

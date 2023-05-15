@@ -1,6 +1,8 @@
 
 import { useReducer, useState } from "react";
 import "./TransactionForm.css";
+import { useGlobalContext } from "../../Context/GlobalContext";
+import moment from "moment";
 
 function reducer(state, action) {
     switch (action.type) {
@@ -24,19 +26,32 @@ function reducer(state, action) {
             ...state,
             category: action.payload
         };
+        case 'reset':
+          return{
+            ...intialState
+          }
+
       default:
         throw new Error('Unexpected action');
     }
 };
 
-function TransactionsForm() {
 
-    const [state, dispatch] = useReducer(reducer, {
-        title: '',
-        amount: '',
-        description: '',
-        category: ''
-    });
+const intialState = 
+{
+  title: '',
+  amount: '',
+  description: '',
+  category: ''
+}
+
+
+function TransactionsForm(props) {
+
+    const {addTransaction} = useGlobalContext()
+
+
+    const [state, dispatch] = useReducer(reducer, intialState);
     
     const [valid,setValid] = useState({
       titleValid: true,
@@ -50,7 +65,6 @@ function TransactionsForm() {
       switch (e.target.id) {
         case 'Title':
           dispatch({ type: 'changeTitle', payload: e.target.value})
-          console.log(e.target)
           break;
           case 'Amount':
             dispatch({ type: 'changeAmount', payload: e.target.value})
@@ -71,16 +85,28 @@ function TransactionsForm() {
       e.preventDefault()
 
       const [title,amount,description,category] = [e.target.Title.value,e.target.Amount.value,e.target.Description.value,e.target.Category.value]
-
-    
+      
         setValid({
           titleValid: title? true: false,
           amountValid: amount? true: false,
           categoryValid: category!= 'Choose...'? true: false,
 
         })
-      
 
+        moment.locale("en-il"); 
+
+        if(title && amount && category!= 'Choose...'){
+          addTransaction({
+            type: "income",
+            title: title,
+            amount: amount,
+            date: moment().format("YYYY-MM-DD"),
+            category: category,
+            description: description
+          })
+          dispatch({ type: 'reset'})
+          props.setAdded(prev => !prev)
+        }
     }
     
 
@@ -90,13 +116,13 @@ function TransactionsForm() {
           <form onSubmit={submitHandler} className="needs-validation" noValidate="">
           <div className="col-md-4 mb-3">
                 <label htmlFor="Title">Title</label>
-                <input onChange={changeHandler} type="text" className={valid.titleValid? 'form-control': "form-control invalid"} name="tosic" id="Title" value={state.title} required=""/>
+                <input onChange={changeHandler} type="text" className={valid.titleValid? 'form-control': "form-control invalid"} maxLength={20} id="Title" value={state.title} required=""/>
             </div>
 
             <div className="col-md-4 mb-3">
               <label htmlFor="Amount">Amount</label>
               <div className="input-group">
-                <input onChange={changeHandler} type="number" className={valid.amountValid? 'form-control': "form-control invalid"} id="Amount" min={0}  value={state.amount} required=""/>
+                <input onChange={changeHandler} type="number" className={valid.amountValid? 'form-control': "form-control invalid"} maxLength={10} id="Amount" min={0}  value={state.amount} required=""/>
               </div>
             </div>
 
@@ -109,7 +135,7 @@ function TransactionsForm() {
             <div className="row">
               <div className="col-md-4 mb-3">
                 <label htmlFor="Category">Category</label>
-                <select onChange={changeHandler} className={valid.categoryValid? "custom-select d-block w-100": "custom-select d-block w-100 invalid"} id="Category" value={state.category} required="">
+                <select onChange={changeHandler} className={valid.categoryValid? "custom-select d-block w-100": "custom-select d-block w-100 invalid"} maxLength={50} id="Category" value={state.category} required="">
                   <option>Choose...</option>
                   <option>United States</option>
                 </select>
