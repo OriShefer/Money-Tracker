@@ -22,7 +22,8 @@ export const GlobalProvider = (props) => {
 
     const [lastTransactions,setLastTransactions] = useState([])
 
-    const [categories,setCategories] = useState([])
+    const [incomeCategories,setIncomeCategories] = useState([])
+    const [expenseCategories,setExpenseCategories] = useState([])
 
     const [lastSavings,setLastSavings] = useState([])
 
@@ -84,12 +85,20 @@ export const GlobalProvider = (props) => {
         setExpensesByCategoryAmount(response.data);
     }
 
-    const getCategories =  async () => {
-        const response = await axios.get(`${BASE_URL}get-categories`)
+    const getIncomeCategories =  async () => {
+        const response = await axios.get(`${BASE_URL}get-income-categories`)
             .catch((err) =>{
                 setError(err.response.data.message)
             });
-        setCategories(response.data)
+        setIncomeCategories(response.data)
+    }
+
+    const getExpenseCategories =  async () => {
+        const response = await axios.get(`${BASE_URL}get-expense-categories`)
+            .catch((err) =>{
+                setError(err.response.data.message)
+            });
+        setExpenseCategories(response.data)
     }
 
     const addCategory =  async (body) => {
@@ -175,8 +184,10 @@ export const GlobalProvider = (props) => {
             incomesByCategoryAmount,
             getExpensesByCategoryAmount,
             expensesByCategoryAmount,
-            getCategories,
-            categories,
+            getIncomeCategories,
+            incomeCategories,
+            getExpenseCategories,
+            expenseCategories,
             addCategory,
             getLastTransactions,
             lastTransactions,

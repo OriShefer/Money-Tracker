@@ -1,4 +1,4 @@
-const { getCategories, addCategory } = require('../controllers/category');
+const { addCategory, getIncomeCategories, getExpenseCategories } = require('../controllers/category');
 const { getExpenses, getExpensesByCategoryAmount } = require('../controllers/expense');
 const { getIncomes, getIncomesByCategoryAmount } = require('../controllers/income');
 const { addSaving, getLastSavings } = require('../controllers/saving');
@@ -14,7 +14,8 @@ router
     .delete('/delete-transaction/:id', deleteTransaction)
     .delete('/delete-all-transactions',deleteAllTransaction)
 
-    .get('/get-categories', getCategories)
+    .get('/get-income-categories', getIncomeCategories)
+    .get('/get-expense-categories', getExpenseCategories)
     .post('/add-category', addCategory)
    
     .get('/get-incomes',getIncomes)

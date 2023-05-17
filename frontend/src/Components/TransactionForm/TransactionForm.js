@@ -48,8 +48,7 @@ const intialState =
 
 function TransactionsForm(props) {
 
-    const {addTransaction,getCategories,categories} = useGlobalContext()
-
+    const {addTransaction,getIncomeCategories,incomeCategories,getExpenseCategories,expenseCategories,INCOME,EXPENSE} = useGlobalContext()
 
     const [state, dispatch] = useReducer(reducer, intialState);
     
@@ -59,9 +58,35 @@ function TransactionsForm(props) {
       categoryValid: true
     })
 
+    const [categories,setCategories] = useState([])
+
+
     useEffect(() => {
-      getCategories();
+      if(props.type === INCOME){
+        getIncomeCategories()
+      }
+
+      if(props.type === EXPENSE){
+        getExpenseCategories()
+      }      
     },[])
+
+    useEffect(() => {
+
+      if(props.type === INCOME){    
+          setCategories(incomeCategories.map((category) => (
+            <option key={category.name}>{category.name}</option>
+          )))
+      }
+
+      if(props.type === EXPENSE){
+          setCategories(expenseCategories.map((category) => (
+            <option key={category.name}>{category.name}</option>
+          )))
+     
+      }      
+    },[incomeCategories,expenseCategories])
+
 
     const changeHandler = (e) => {
       e.preventDefault()
@@ -143,9 +168,7 @@ function TransactionsForm(props) {
                 <label htmlFor="Category">Category</label>
                 <select onChange={changeHandler} className={valid.categoryValid? "custom-select d-block w-100": "custom-select d-block w-100 invalid"} maxLength={50} id="Category" value={state.category} required="">
                   <option>Choose...</option>
-                  {categories.map((category) => (
-                    <option key={category.name}>{category.name}</option>
-                  ))}
+                  {categories}
                 </select>
               </div>
             </div>
