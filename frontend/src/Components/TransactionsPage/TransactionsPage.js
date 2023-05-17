@@ -8,6 +8,7 @@ function TransactionsPage() {
   const {getIncomeAmount,incomeTotalAmount,getExpenseAmount,expenseTotalAmount,setTextColor} = useGlobalContext();
 
   const [added,setAdded] = useState(false)
+  const [total,setTotal] = useState()
 
   useEffect(() => {
     getIncomeAmount()

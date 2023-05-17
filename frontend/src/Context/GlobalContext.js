@@ -1,4 +1,4 @@
-import React, { useCallback, useContext, useState } from "react"
+import React, { useCallback, useContext, useRef, useState } from "react"
 import axios from 'axios'
 
 
@@ -49,9 +49,11 @@ export const GlobalProvider = (props) => {
             .catch((err) =>{
                 setError(err.response.data.message)
             });
+           
         let totalAmount = 0;
         response.data.forEach((income) => {totalAmount+=income.amount});
         setIncomeTotalAmount(totalAmount);
+
     }
 
     const getExpenseAmount = async () => {
