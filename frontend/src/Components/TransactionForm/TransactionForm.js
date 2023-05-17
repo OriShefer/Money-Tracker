@@ -1,5 +1,5 @@
 
-import { useReducer, useState } from "react";
+import { useEffect, useReducer, useState } from "react";
 import "./TransactionForm.css";
 import { useGlobalContext } from "../../Context/GlobalContext";
 import moment from "moment";
@@ -48,7 +48,7 @@ const intialState =
 
 function TransactionsForm(props) {
 
-    const {addTransaction} = useGlobalContext()
+    const {addTransaction,getCategories,categories} = useGlobalContext()
 
 
     const [state, dispatch] = useReducer(reducer, intialState);
@@ -58,6 +58,10 @@ function TransactionsForm(props) {
       amountValid: true,
       categoryValid: true
     })
+
+    useEffect(() => {
+      getCategories();
+    },[])
 
     const changeHandler = (e) => {
       e.preventDefault()
@@ -139,7 +143,9 @@ function TransactionsForm(props) {
                 <label htmlFor="Category">Category</label>
                 <select onChange={changeHandler} className={valid.categoryValid? "custom-select d-block w-100": "custom-select d-block w-100 invalid"} maxLength={50} id="Category" value={state.category} required="">
                   <option>Choose...</option>
-                  <option>United States</option>
+                  {categories.map((category) => (
+                    <option key={category.name}>{category.name}</option>
+                  ))}
                 </select>
               </div>
             </div>

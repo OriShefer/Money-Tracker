@@ -1,5 +1,4 @@
 
-import { useEffect } from "react";
 import "./Sidebar.css";
 
 
@@ -37,8 +36,6 @@ function Sidebar(props) {
     </a>
     <hr/>
     <ul className="nav nav-pills flex-column mb-auto">
-
-      {sidebarItems.forEach((item) => console.log(item))}
         
         {sidebarItems.map((item) => (
           <li
