@@ -74,7 +74,7 @@ export const GlobalProvider = (props) => {
             .catch((err) =>{
                 setError(err.response.data.message)
             });
-        setIncomesByCategoryAmount(() => response.data);
+        setIncomesByCategoryAmount(response.data);
     }
     
     const getExpensesByCategoryAmount = async () => {
