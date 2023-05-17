@@ -10,12 +10,12 @@ const TransactionSchema = new mongoose.Schema({
         type: String,
         required: true,
         trim: true,
-        maxLength: 50
+        maxLength: 20
     },
     amount: {
         type: Number,
         required: true,
-        maxLength: 20,
+        maxLength: 10,
         trim: true
     },
     date: {
@@ -30,7 +30,7 @@ const TransactionSchema = new mongoose.Schema({
     },
     description: {
         type: String,
-        maxLength: 20,
+        maxLength: 50,
         trim: true
     },
 }, {timestamps: true})

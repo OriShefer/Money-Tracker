@@ -1,4 +1,4 @@
-import React, { useCallback, useContext, useState } from "react"
+import React, {useContext, useState } from "react"
 import axios from 'axios'
 
 
@@ -21,6 +21,9 @@ export const GlobalProvider = (props) => {
     const [expensesByCategoryAmount, setExpensesByCategoryAmount] = useState([])
 
     const [lastTransactions,setLastTransactions] = useState([])
+
+    const [incomeCategories,setIncomeCategories] = useState([])
+    const [expenseCategories,setExpenseCategories] = useState([])
 
     const [lastSavings,setLastSavings] = useState([])
 
@@ -49,9 +52,11 @@ export const GlobalProvider = (props) => {
             .catch((err) =>{
                 setError(err.response.data.message)
             });
+           
         let totalAmount = 0;
         response.data.forEach((income) => {totalAmount+=income.amount});
         setIncomeTotalAmount(totalAmount);
+
     }
 
     const getExpenseAmount = async () => {
@@ -80,6 +85,30 @@ export const GlobalProvider = (props) => {
         setExpensesByCategoryAmount(response.data);
     }
 
+    const getIncomeCategories =  async () => {
+        const response = await axios.get(`${BASE_URL}get-income-categories`)
+            .catch((err) =>{
+                setError(err.response.data.message)
+            });
+        setIncomeCategories(response.data)
+    }
+
+    const getExpenseCategories =  async () => {
+        const response = await axios.get(`${BASE_URL}get-expense-categories`)
+            .catch((err) =>{
+                setError(err.response.data.message)
+            });
+        setExpenseCategories(response.data)
+    }
+
+    const addCategory =  async (body) => {
+        await axios.get(`${BASE_URL}add-category`,body)
+            .catch((err) =>{
+                setError(err.response.data.message)
+            });
+    }
+
+
     const getLastTransactions = async () => {
         const response = await axios.get(`${BASE_URL}get-last-transactions`)
         .catch((err) =>{
@@ -96,6 +125,14 @@ export const GlobalProvider = (props) => {
             
         })
         setLastTransactions(transactions);
+    }
+
+    const addTransaction = async (body) => {
+        await axios.post(`${BASE_URL}add-transaction`, body)
+        .catch((err) =>{
+            setError(err.response.data.message)
+        });
+
     }
 
     const getLastSavings = async () => {
@@ -147,8 +184,14 @@ export const GlobalProvider = (props) => {
             incomesByCategoryAmount,
             getExpensesByCategoryAmount,
             expensesByCategoryAmount,
+            getIncomeCategories,
+            incomeCategories,
+            getExpenseCategories,
+            expenseCategories,
+            addCategory,
             getLastTransactions,
             lastTransactions,
+            addTransaction,
             getLastSavings,
             lastSavings,
             setTextColor,

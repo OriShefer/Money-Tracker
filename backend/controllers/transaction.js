@@ -1,13 +1,13 @@
 const TransactionSchema= require("../models/TransactionModel")
 
 exports.addTransaction = async (req, res) => {
-    const {type ,title, amount,date, category, description}  = req.body
+    const {type ,title, amount, date, category, description}  = req.body
 
     const transaction = TransactionSchema({
         type,
         title,
         amount,
-        date,
+        date: new Date(date),
         category,
         description
     })
@@ -23,6 +23,7 @@ exports.addTransaction = async (req, res) => {
         await transaction.save()
         res.status(200).json({message: 'Transaction Added'})
     } catch (error) {
+        console.log(error)
         res.status(500).json({message: 'Server Error'})
     }
 
