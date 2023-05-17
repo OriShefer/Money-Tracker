@@ -1,4 +1,4 @@
-import React, { useCallback, useContext, useRef, useState } from "react"
+import React, {useContext, useState } from "react"
 import axios from 'axios'
 
 
@@ -101,7 +101,7 @@ export const GlobalProvider = (props) => {
     }
 
     const addTransaction = async (body) => {
-        const response = await axios.post(`${BASE_URL}add-transaction`, body)
+        await axios.post(`${BASE_URL}add-transaction`, body)
         .catch((err) =>{
             setError(err.response.data.message)
         });

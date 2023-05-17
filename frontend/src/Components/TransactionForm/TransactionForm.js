@@ -81,6 +81,8 @@ function TransactionsForm(props) {
 
     }
 
+  
+
     const submitHandler = (e) => {
       e.preventDefault()
 
@@ -89,13 +91,14 @@ function TransactionsForm(props) {
         setValid({
           titleValid: title? true: false,
           amountValid: amount? true: false,
-          categoryValid: category!= 'Choose...'? true: false,
+          categoryValid: category!== 'Choose...'? true: false,
 
         })
 
         moment.locale("en-il"); 
 
-        if(title && amount && category!= 'Choose...'){
+        if(title && amount && category!== 'Choose...'){
+          dispatch({ type: 'reset'})
           addTransaction({
             type: "income",
             title: title,
@@ -104,8 +107,7 @@ function TransactionsForm(props) {
             category: category,
             description: description
           })
-          dispatch({ type: 'reset'})
-          props.setAdded(prev => !prev)
+          .then(() =>  props.setAdded(prev =>!prev))
         }
     }
     
@@ -122,7 +124,7 @@ function TransactionsForm(props) {
             <div className="col-md-4 mb-3">
               <label htmlFor="Amount">Amount</label>
               <div className="input-group">
-                <input onChange={changeHandler} type="number" className={valid.amountValid? 'form-control': "form-control invalid"} maxLength={10} id="Amount" min={0}  value={state.amount} required=""/>
+                <input onChange={changeHandler} type="number" className={valid.amountValid? 'form-control': "form-control invalid"} maxLength={10} id="Amount" min={1}  value={state.amount} required=""/>
               </div>
             </div>
 

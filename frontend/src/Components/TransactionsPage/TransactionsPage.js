@@ -3,21 +3,19 @@ import { useGlobalContext } from "../../Context/GlobalContext";
 import "./TransactionsPage.css";
 import TransactionsForm from "../TransactionForm/TransactionForm";
 
+
 function TransactionsPage() {
 
   const {getIncomeAmount,incomeTotalAmount,getExpenseAmount,expenseTotalAmount,setTextColor} = useGlobalContext();
 
   const [added,setAdded] = useState(false)
-  const [total,setTotal] = useState()
 
   useEffect(() => {
     getIncomeAmount()
  
   },[added])
 
-  useEffect(() => {
-
-  },[incomeTotalAmount])
+  
 
   return (
   <div className="card me-5 transactions-page">

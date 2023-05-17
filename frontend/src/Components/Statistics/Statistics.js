@@ -1,4 +1,4 @@
-import { useEffect, useLayoutEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { useGlobalContext } from "../../Context/GlobalContext";
 
 import CategorySum from "../CategorySum/CategorySum";
