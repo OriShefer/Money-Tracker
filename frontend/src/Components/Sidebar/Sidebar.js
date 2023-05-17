@@ -11,14 +11,20 @@ function Sidebar() {
     <ul className="nav nav-pills flex-column mb-auto">
       <li className="mb-2 nav-item">
         <a href="#" className="nav-link active" aria-current="page">
-        <img className="me-2" src={process.env.PUBLIC_URL + 'img/dashboard.png'} width="16rem" height="16rem"/> 
+        <img className="me-2" src={process.env.PUBLIC_URL + 'img/dashboard.png'} width="30rem" height="30rem"/> 
          Dashboard
         </a>
       </li>
       <li>
         <a href="#" className=" mb-2 nav-link link-dark">
-        <img className="me-2" src={process.env.PUBLIC_URL + 'img/cash-flow.png'} width="16rem" height="16rem"/> 
-          Transactions
+        <img className="me-2" src={process.env.PUBLIC_URL + 'img/income.png'} width="30rem" height="30rem"/> 
+          Add Income
+        </a>
+      </li>
+      <li>
+        <a href="#" className=" mb-2 nav-link link-dark">
+        <img className="me-2" src={process.env.PUBLIC_URL + 'img/expense.png'} width="30rem" height="30rem"/> 
+          Add Expense
         </a>
       </li>
 
