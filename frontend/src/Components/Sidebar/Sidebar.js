@@ -1,7 +1,33 @@
 
+import { useEffect } from "react";
 import "./Sidebar.css";
 
-function Sidebar() {
+
+
+function Sidebar(props) {
+
+
+  const sidebarItems = [
+    {
+      id: 1,
+      title: 'Dashboard',
+      imgLink: 'img/dashboard.png',
+      link: '/',
+    },
+  {
+      id: 2,
+      title: 'Add Income',
+      imgLink: 'img/income.png',
+      link: '/add-income',
+  },
+  {
+      id: 3,
+      title: 'Add Expense',
+      imgLink: 'img/expense.png',
+      link: '/add-expense',
+  }
+  ];
+  
 
   return (
 <div className="sidebar d-flex flex-column p-3 bg-light position-fixed">
@@ -11,25 +37,21 @@ function Sidebar() {
     </a>
     <hr/>
     <ul className="nav nav-pills flex-column mb-auto">
-      <li className="mb-2 nav-item">
-        <a href="/" className="nav-link active" aria-current="page">
-        <img className="me-2" src={process.env.PUBLIC_URL + 'img/dashboard.png'} width="30rem" height="30rem"/> 
-         Dashboard
-        </a>
-      </li>
-      <li>
-        <a href="/add-income" className=" mb-2 nav-link link-dark ">
-        <img className="me-2" src={process.env.PUBLIC_URL + 'img/income.png'} width="30rem" height="30rem"/> 
-          Add Income
-        </a>
-      </li>
-      <li>
-        <a href="/add-expense" className=" mb-2 nav-link link-dark">
-        <img className="me-2" src={process.env.PUBLIC_URL + 'img/expense.png'} width="30rem" height="30rem"/> 
-          Add Expense
-        </a>
-      </li>
 
+      {sidebarItems.forEach((item) => console.log(item))}
+        
+        {sidebarItems.map((item) => (
+          <li
+            key={item.id}
+            className={ props.active === item.id ? 'active mb-2 nav-link link-dark' : 'mb-2 nav-link link-dark' }
+          >
+            <a href={item.link} className="title nav-link" aria-current="page">
+            <img className="me-2" src={process.env.PUBLIC_URL + item.imgLink} width="30rem" height="30rem"/> 
+                {item.title}
+             </a>
+          </li>
+
+        ))}
     </ul>
     <hr/>
   </div>
