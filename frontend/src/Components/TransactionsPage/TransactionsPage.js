@@ -15,21 +15,9 @@ function TransactionsPage(props) {
   const [amount,setAmount] = useState()
 
   useEffect(() => {
-
-    if(props.type === INCOME){
-      getIncomeAmount()
-      setTitle("Add Income")
-      setTotalTitle("Total Incomes:")
-      setAmount(incomeTotalAmount)
-    }
-
-    if(props.type === EXPENSE){
-      getExpenseAmount()
-      setTitle("Add Expense")
-      setTotalTitle("Total Expenses:")
-      setAmount(expenseTotalAmount)
-    }
-   
+    getIncomeAmount()
+    setTitle("Add Income")
+    setTotalTitle("Total Incomes:")
  
   },[added])
 
@@ -43,7 +31,7 @@ function TransactionsPage(props) {
           <div className="card me-5 ">
           <div style={{textAlign:"center"}} className="card-body ">
             {totalTitle} 
-            <span style={{color: setTextColor('income'), fontWeight:'bold'}}> {amount}₪</span>
+            <span style={{color: setTextColor('income'), fontWeight:'bold'}}> {incomeTotalAmount}₪</span>
           </div>
           </div>
         </div>
