@@ -24,27 +24,38 @@ function Statistics() {
 useEffect(() => {
   if(title === incomeState)
   {
-    setContent(incomesByCategoryAmount.map((category) => (
-      <CategorySum
-      key = {category._id}
-      category = {category._id}
-      amount = {category.totalQuantity}
-      />)
-      ))
+    if(incomesByCategoryAmount.length === 0){
+      setContent(<h2 className="statistics-empty">I dont know</h2>)
+    }else{
+      setContent(incomesByCategoryAmount.map((category) => (
+        <CategorySum
+        key = {category._id}
+        category = {category._id}
+        amount = {category.totalQuantity}
+        />)
+        ))
+    }
+    
   }
 
 }, [incomesByCategoryAmount,title])
 
 useEffect(() => {
   if(title === expenseState){
-    setContent(expensesByCategoryAmount.map((category) => (
-      <CategorySum
-      key = {category._id}
-      category = {category._id}
-      amount = {category.totalQuantity}
-      />
-    )))
+      if(expensesByCategoryAmount.length === 0){
+        setContent(<h2 className="statistics-empty">I dont know</h2>)
+      }else{
+        setContent(expensesByCategoryAmount.map((category) => (
+          <CategorySum
+          key = {category._id}
+          category = {category._id}
+          amount = {category.totalQuantity}
+          />
+        )))
+      }
+   
   }
+
 
   
 }, [title])

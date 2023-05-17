@@ -1,6 +1,15 @@
 import "./Sidebar.css";
 
-function Sidebar() {
+function Sidebar(props) {
+
+  const clickHandler = (e) => {
+
+    e.preventDefault()
+    props.setActive(e.target.id)
+
+  }
+
+
   return (
 <div className="sidebar d-flex flex-column p-3 bg-light position-fixed">
     <a href="/" className="d-flex align-items-center mb-3 mb-md-0 me-md-auto link-dark text-decoration-none">
@@ -10,19 +19,19 @@ function Sidebar() {
     <hr/>
     <ul className="nav nav-pills flex-column mb-auto">
       <li className="mb-2 nav-item">
-        <a href="#" className="nav-link active" aria-current="page">
+        <a onClick={clickHandler} id = {1} href="" className="nav-link active" aria-current="page">
         <img className="me-2" src={process.env.PUBLIC_URL + 'img/dashboard.png'} width="30rem" height="30rem"/> 
          Dashboard
         </a>
       </li>
       <li>
-        <a href="#" className=" mb-2 nav-link link-dark">
+        <a onClick={clickHandler} id = {2} href="" className=" mb-2 nav-link link-dark ">
         <img className="me-2" src={process.env.PUBLIC_URL + 'img/income.png'} width="30rem" height="30rem"/> 
           Add Income
         </a>
       </li>
       <li>
-        <a href="#" className=" mb-2 nav-link link-dark">
+        <a onClick={clickHandler} id = {3} href="" className=" mb-2 nav-link link-dark">
         <img className="me-2" src={process.env.PUBLIC_URL + 'img/expense.png'} width="30rem" height="30rem"/> 
           Add Expense
         </a>
