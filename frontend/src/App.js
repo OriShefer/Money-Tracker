@@ -1,36 +1,20 @@
-import Sidebar from './Components/Sidebar/Sidebar';
-import Content from './Components/Content/Content';
-import TransactionsPage from './Components/TransactionsPage/TransactionsPage';
-import { useState } from 'react';
-import { useGlobalContext } from './Context/GlobalContext';
+import Sidebar from "./Components/Sidebar/Sidebar";
+import Content from "./Components/Content/Content";
+import TransactionsPage from "./Components/TransactionsPage/TransactionsPage";
+import { useGlobalContext } from "./Context/GlobalContext";
 
-
+import { Route, Routes } from "react-router-dom";
 
 function App() {
-
-  const {INCOME,EXPENSE} = useGlobalContext()
-  const [active, setActive] = useState(1)
-
-  const displayData = () => {
-    console.log(active)
-    switch(parseInt(active)){
-      case 1:
-        return <Content/>;
-      case 2:
-        return <TransactionsPage type = {INCOME}/>;
-      case 3:
-        return <TransactionsPage type = {EXPENSE}/>;
-      default: 
-        return <Content/>;
-
-    }
-  }
+  const { INCOME, EXPENSE } = useGlobalContext();
 
   return (
-    <div>
-      <Sidebar setActive = {setActive}/>
-      {displayData()}
-    </div>
+    <Routes>
+      <Route path="/" exact element = {<> <Sidebar/> <Content /> </> }/>
+      <Route path="/add-income" exact  element ={<> <Sidebar/>  <TransactionsPage type = {INCOME}/></>} />
+      <Route path="/add-expense" exact element = {<> <Sidebar/> <TransactionsPage type={EXPENSE}/> </>}/>
+      <Route path="*" element = {<> <Sidebar/> <Content /> </> }/>
+    </Routes>
   );
 }
 

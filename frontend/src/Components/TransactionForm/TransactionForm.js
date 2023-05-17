@@ -100,7 +100,7 @@ function TransactionsForm(props) {
         if(title && amount && category!== 'Choose...'){
           dispatch({ type: 'reset'})
           addTransaction({
-            type: "income",
+            type: props.type,
             title: title,
             amount: amount,
             date: moment().format("YYYY-MM-DD"),
