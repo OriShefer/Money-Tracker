@@ -45,7 +45,7 @@ function TransactionsPage(props) {
             <div className="card me-5 ">
               <div style={{ textAlign: "center" }} className="card-body ">
                 {totalTitle + " "}
-                <span style={{ color: setTextColor("income"), fontWeight: "bold" }} >
+                <span style={{ color: setTextColor(props.type), fontWeight: "bold" }} >
                   {expenseTotalAmount}{incomeTotalAmount}₪
                 </span>
               </div>
