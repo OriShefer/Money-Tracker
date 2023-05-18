@@ -54,7 +54,7 @@ const intialState =
 
 function TransactionsForm(props) {
 
-    const {addTransaction,getIncomeCategories,incomeCategories,getExpenseCategories,expenseCategories,INCOME,EXPENSE} = useGlobalContext()
+    const {addTransaction,getIncomeCategories,incomeCategories,getExpenseCategories,expenseCategories,addCategory,INCOME,EXPENSE} = useGlobalContext()
 
     const [state, dispatch] = useReducer(reducer, intialState);
     
@@ -66,7 +66,9 @@ function TransactionsForm(props) {
     
     const [categories,setCategories] = useState([])
 
-    const [addCategory,setAddCategory] = useState(false)
+    const [addNewCategory,setAddNewCategory] = useState(false)
+    const [addCategoryValid,setAddCategoryValid] = useState(true)
+    const [addedCategory,setAddedCategory] = useState(false)
 
     useEffect(() => {
       if(props.type === INCOME){
@@ -76,7 +78,7 @@ function TransactionsForm(props) {
       if(props.type === EXPENSE){
         getExpenseCategories()
       }      
-    },[])
+    },[addedCategory])
 
     useEffect(() => {
 
@@ -150,23 +152,51 @@ function TransactionsForm(props) {
         }
     }
 
-    const addCategoryClickHandler = () => {
-      setAddCategory(prev => !prev)
+    const plusClickHandler = () => {
+      setAddNewCategory(prev => !prev)
     }
+
+    const addCategoryClickHandler = () => {
+      let found = false
+      
+
+      categories.forEach((item) =>{
+        if(item.key.toLowerCase() === state.newCategory.toLowerCase()){
+          found = true
+        }
+      })
+
+
+      if(!found){
+        addCategory({
+          name:state.newCategory,
+          type: props.type
+        }).then(() => setAddedCategory(prev => !prev))
+        setAddNewCategory(prev => !prev)
+
+      }else{
+        setAddCategoryValid(false)
+      }
+
+
+
+    }
+
 
     
 
     const addCategoryInput = 
-    <div style={{marginTop:'1.2rem'}} className="col-md-4">
-      <input onChange={changeHandler} type="text" className="form-control" id="NewCategory" placeholder="New Category" value={state.newCategory} />
-      <button className="btn btn-success btn-lg btn-block mt-3" type="submit">Add Category</button>
-    </div>;
+      <div style={{marginTop:'1.2rem'}} className="col-md-4">
+        <input onChange={changeHandler} type="text" className={addCategoryValid? 'form-control': "form-control invalid"} id="NewCategory" placeholder="New Category" value={state.newCategory} />
+        <button onClick={addCategoryClickHandler} className="btn btn-success btn-lg btn-block mt-3" type="button">Add Category</button>
+      </div>;
+
     
 
   return (
 
         <div className="col-md-8 order-md-1 mt-4">
-          <form onSubmit={submitHandler} className="needs-validation" noValidate="">
+          <form onSubmit={submitHandler}>
           <div className="col-md-4 mb-3">
                 <label htmlFor="Title">Title</label>
                 <input onChange={changeHandler} type="text" className={valid.titleValid? 'form-control': "form-control invalid"} maxLength={20} id="Title" value={state.title}/>
@@ -195,10 +225,10 @@ function TransactionsForm(props) {
                       <button style={{marginTop:'1.8rem'}} className="btn btn-primary btn-lg" type="submit">Add</button>  
                   </div>
 
-                  {addCategory? addCategoryInput:<></>}
+                  {addNewCategory? addCategoryInput:<></>}
 
                   <div className="col-md-4 mb-3">
-                      <button onClick={addCategoryClickHandler} type="button" className="btn btn-success rounded-circle custom-button">
+                      <button onClick={plusClickHandler} type="button" className="btn btn-success rounded-circle custom-button">
                         +
                       </button>
                   </div>

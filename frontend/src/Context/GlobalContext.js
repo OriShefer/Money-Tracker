@@ -102,7 +102,7 @@ export const GlobalProvider = (props) => {
     }
 
     const addCategory =  async (body) => {
-        await axios.get(`${BASE_URL}add-category`,body)
+        await axios.post(`${BASE_URL}add-category`,body)
             .catch((err) =>{
                 setError(err.response.data.message)
             });
