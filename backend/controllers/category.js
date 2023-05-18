@@ -1,5 +1,6 @@
 const CategorySchema= require("../models/CategoryModel")
 
+
 exports.addCategory= async (req, res) => {
     const {name,type}  = req.body
 
