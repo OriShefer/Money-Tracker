@@ -118,6 +118,7 @@ export const GlobalProvider = (props) => {
             return ({
                 id: transaction._id,
                category: transaction.category,
+               title: transaction.title,
                type: transaction.type,
                amount: transaction.amount,
                date: transaction.date

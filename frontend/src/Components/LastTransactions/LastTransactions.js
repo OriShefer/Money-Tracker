@@ -22,6 +22,7 @@ function LastTransactions() {
             <tr>
               <LastTransactionHeader
                 category={"Category"}
+                title = {"Title"}
                 type={"Type"}
                 date= {"Date"}
                 amount={"Amount"}
@@ -34,6 +35,7 @@ function LastTransactions() {
               <Transaction
                 key = {transaction.id}
                 category={transaction.category}
+                title = {transaction.title}
                 type={transaction.type}
                 amount={transaction.amount}
                 date = {transaction.date}
