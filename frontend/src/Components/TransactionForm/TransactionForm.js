@@ -26,6 +26,11 @@ function reducer(state, action) {
             ...state,
             category: action.payload
         };
+        case 'changeNewCategory':
+        return { 
+          ...state,
+          newCategory: action.payload
+      };
         case 'reset':
           return{
             ...intialState
@@ -42,7 +47,8 @@ const intialState =
   title: '',
   amount: '',
   description: '',
-  category: ''
+  category: '',
+  newCategory: ''
 }
 
 
@@ -57,9 +63,10 @@ function TransactionsForm(props) {
       amountValid: true,
       categoryValid: true
     })
-
+    
     const [categories,setCategories] = useState([])
 
+    const [addCategory,setAddCategory] = useState(false)
 
     useEffect(() => {
       if(props.type === INCOME){
@@ -104,6 +111,9 @@ function TransactionsForm(props) {
           case 'Category':
             dispatch({ type: 'changeCategory', payload: e.target.value})
             break;
+          case 'NewCategory':
+          dispatch({ type: 'changeNewCategory', payload: e.target.value})
+          break;
         default:
           throw new Error('Unexpected action');
       }
@@ -139,6 +149,18 @@ function TransactionsForm(props) {
           .then(() =>  props.setAdded(prev =>!prev))
         }
     }
+
+    const addCategoryClickHandler = () => {
+      setAddCategory(prev => !prev)
+    }
+
+    
+
+    const addCategoryInput = 
+    <div style={{marginTop:'1.2rem'}} className="col-md-4">
+      <input onChange={changeHandler} type="text" className="form-control" id="NewCategory" placeholder="New Category" value={state.newCategory} />
+      <button className="btn btn-success btn-lg btn-block mt-3" type="submit">Add Category</button>
+    </div>;
     
 
   return (
@@ -147,13 +169,13 @@ function TransactionsForm(props) {
           <form onSubmit={submitHandler} className="needs-validation" noValidate="">
           <div className="col-md-4 mb-3">
                 <label htmlFor="Title">Title</label>
-                <input onChange={changeHandler} type="text" className={valid.titleValid? 'form-control': "form-control invalid"} maxLength={20} id="Title" value={state.title} required=""/>
+                <input onChange={changeHandler} type="text" className={valid.titleValid? 'form-control': "form-control invalid"} maxLength={20} id="Title" value={state.title}/>
             </div>
 
             <div className="col-md-4 mb-3">
               <label htmlFor="Amount">Amount</label>
               <div className="input-group">
-                <input onChange={changeHandler} type="number" className={valid.amountValid? 'form-control': "form-control invalid"} maxLength={10} id="Amount" min={1}  value={state.amount} required=""/>
+                <input onChange={changeHandler} type="number" className={valid.amountValid? 'form-control': "form-control invalid"} maxLength={10} id="Amount" min={1}  value={state.amount}/>
               </div>
             </div>
 
@@ -162,18 +184,28 @@ function TransactionsForm(props) {
               <input onChange={changeHandler} type="test" className="form-control" id="Description" value={state.description}/>
 
             </div>
-
             <div className="row">
-              <div className="col-md-4 mb-3">
-                <label htmlFor="Category">Category</label>
-                <select onChange={changeHandler} className={valid.categoryValid? "custom-select d-block w-100": "custom-select d-block w-100 invalid"} maxLength={50} id="Category" value={state.category} required="">
-                  <option>Choose...</option>
-                  {categories}
-                </select>
-              </div>
-            </div>
 
-            <button className="btn btn-primary btn-lg btn-block" type="submit">Add</button>
+                  <div className="col-md-4 mb-3">
+                      <label htmlFor="Category">Category</label>
+                      <select onChange={changeHandler} className={valid.categoryValid? "custom-select d-block w-100": "custom-select d-block w-100 invalid"} maxLength={50} id="Category" value={state.category}>
+                        <option>Choose...</option>
+                        {categories}
+                      </select>         
+                      <button style={{marginTop:'1.8rem'}} className="btn btn-primary btn-lg" type="submit">Add</button>  
+                  </div>
+
+                  {addCategory? addCategoryInput:<></>}
+
+                  <div className="col-md-4 mb-3">
+                      <button onClick={addCategoryClickHandler} type="button" className="btn btn-success rounded-circle custom-button">
+                        +
+                      </button>
+                  </div>
+
+          </div>
+              
+
           </form>
         </div>
   );
