@@ -17,8 +17,8 @@ exports.addTransaction = async (req, res) => {
         if(!type || !title || !amount || !date || !category){
             return res.status(400).json({message: 'All fields are required!'})
         }
-        if(amount <= 0 || !amount === 'number'){
-            return res.status(400).json({message: 'Amount must be a positive number!'})
+        if(!amount === 'number'){
+            return res.status(400).json({message: 'Amount must be a number!'})
         }
         await transaction.save()
         res.status(200).json({message: 'Transaction Added'})

@@ -205,7 +205,7 @@ function TransactionsForm(props) {
             <div className="col-md-4 mb-3">
               <label htmlFor="Amount">Amount</label>
               <div className="input-group">
-                <input onChange={changeHandler} type="number" className={valid.amountValid? 'form-control': "form-control invalid"} maxLength={10} id="Amount" min={1}  value={state.amount}/>
+                <input onChange={changeHandler} type="number" className={valid.amountValid? 'form-control': "form-control invalid"} maxLength={10} id="Amount" value={state.amount}/>
               </div>
             </div>
 
