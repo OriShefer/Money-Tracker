@@ -228,8 +228,8 @@ function TransactionsForm(props) {
                   {addNewCategory? addCategoryInput:<></>}
 
                   <div className="col-md-4 mb-3">
-                      <button onClick={plusClickHandler} type="button" className="btn btn-success rounded-circle custom-button">
-                        +
+                      <button onClick={plusClickHandler} type="button" className={addNewCategory?"btn btn-danger rounded-circle custom-button-danger ":"btn btn-success rounded-circle custom-button-success"}>
+                        {addNewCategory?'-':'+'}
                       </button>
                   </div>
 
