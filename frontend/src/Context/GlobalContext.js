@@ -5,6 +5,9 @@ import axios from 'axios'
 const BASE_URL = "http://localhost:3000/api/";
 const INCOME = 'income'
 const EXPENSE = 'expense'
+const CATEGORY = 'category'
+const SAVING = 'saving'
+const TRANSACTION = 'transaction'
 
 
 const GlobalContext = React.createContext()
@@ -31,7 +34,7 @@ export const GlobalProvider = (props) => {
 
     
     const getIncomes = async () => {
-        const response = await axios.get(`${BASE_URL}get-incomes`)
+        const response = await axios.get(`${BASE_URL}${INCOME}/get-incomes`)
             .catch((err) =>{
                 setError(err.response.data.message)
             });
@@ -39,7 +42,7 @@ export const GlobalProvider = (props) => {
     }
 
     const getExpenses =  async () => {
-        const response = await axios.get(`${BASE_URL}get-expenses`)
+        const response = await axios.get(`${BASE_URL}${EXPENSE}/get-expenses`)
             .catch((err) =>{
                 setError(err.response.data.message)
             });
@@ -48,7 +51,7 @@ export const GlobalProvider = (props) => {
 
 
     const getIncomeAmount = async () => {
-        const response = await axios.get(`${BASE_URL}get-incomes`)
+        const response = await axios.get(`${BASE_URL}${INCOME}/get-incomes`)
             .catch((err) =>{
                 setError(err.response.data.message)
             });
@@ -60,7 +63,7 @@ export const GlobalProvider = (props) => {
     }
 
     const getExpenseAmount = async () => {
-        const response = await axios.get(`${BASE_URL}get-expenses`)
+        const response = await axios.get(`${BASE_URL}${EXPENSE}/get-expenses`)
             .catch((err) =>{
                 setError(err.response.data.message)
             });
@@ -70,7 +73,7 @@ export const GlobalProvider = (props) => {
     }
 
     const getIncomesByCategoryAmount = async () => {
-        const response = await axios.get(`${BASE_URL}get-incomes-category`)
+        const response = await axios.get(`${BASE_URL}${INCOME}/get-incomes-category`)
             .catch((err) =>{
                 setError(err.response.data.message)
             });
@@ -78,7 +81,7 @@ export const GlobalProvider = (props) => {
     }
     
     const getExpensesByCategoryAmount = async () => {
-        const response = await axios.get(`${BASE_URL}get-expenses-category`)
+        const response = await axios.get(`${BASE_URL}${EXPENSE}/get-expenses-category`)
             .catch((err) =>{
                 setError(err.response.data.message)
             });
@@ -86,7 +89,7 @@ export const GlobalProvider = (props) => {
     }
 
     const getIncomeCategories =  async () => {
-        const response = await axios.get(`${BASE_URL}get-income-categories`)
+        const response = await axios.get(`${BASE_URL}${INCOME}/get-income-categories`)
             .catch((err) =>{
                 setError(err.response.data.message)
             });
@@ -94,7 +97,7 @@ export const GlobalProvider = (props) => {
     }
 
     const getExpenseCategories =  async () => {
-        const response = await axios.get(`${BASE_URL}get-expense-categories`)
+        const response = await axios.get(`${BASE_URL}${EXPENSE}/get-expense-categories`)
             .catch((err) =>{
                 setError(err.response.data.message)
             });
@@ -102,7 +105,7 @@ export const GlobalProvider = (props) => {
     }
 
     const addCategory =  async (body) => {
-        await axios.post(`${BASE_URL}add-category`,body)
+        await axios.post(`${BASE_URL}${CATEGORY}/add-category`,body)
             .catch((err) =>{
                 setError(err.response.data.message)
             });
@@ -110,7 +113,7 @@ export const GlobalProvider = (props) => {
 
 
     const getLastTransactions = async () => {
-        const response = await axios.get(`${BASE_URL}get-last-transactions`)
+        const response = await axios.get(`${BASE_URL}${TRANSACTION}/get-last-transactions`)
         .catch((err) =>{
             setError(err.response.data.message)
         });
@@ -129,7 +132,7 @@ export const GlobalProvider = (props) => {
     }
 
     const addTransaction = async (body) => {
-        await axios.post(`${BASE_URL}add-transaction`, body)
+        await axios.post(`${BASE_URL}${TRANSACTION}/add-transaction`, body)
         .catch((err) =>{
             setError(err.response.data.message)
         });
@@ -137,7 +140,7 @@ export const GlobalProvider = (props) => {
     }
 
     const getLastSavings = async () => {
-        const response = await axios.get(`${BASE_URL}get-last-savings`)
+        const response = await axios.get(`${BASE_URL}${SAVING}/get-last-savings`)
         .catch((err) =>{
             setError(err.response.data.message)
         });
