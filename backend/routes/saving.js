@@ -1,11 +1,12 @@
-const { addSaving, getLastSavings } = require('../controllers/saving');
+const { updateSaving, getAllSavings,getLastSavings } = require('../controllers/saving');
 
 const router = require('express').Router();
 
 
 router
     .get('/get-last-savings',getLastSavings)
-    .post('/add-saving',addSaving)
+    .get('/get-all-savings',getAllSavings)
+    .patch('/update-saving',updateSaving)
 
 
 module.exports = router

@@ -186,9 +186,9 @@ function TransactionsForm(props) {
     
 
     const addCategoryInput = 
-      <div style={{marginTop:'1.2rem'}} className="col-md-4">
+      <div style={{marginTop:'1.6rem'}} className="col-md-4">
         <input onChange={changeHandler} type="text" className={addCategoryValid? 'form-control': "form-control invalid"} id="NewCategory" placeholder="New Category" value={state.newCategory} />
-        <button onClick={addCategoryClickHandler} className="btn btn-success btn-lg btn-block mt-3" type="button">Add Category</button>
+        <button onClick={addCategoryClickHandler} className="btn btn-success btn-lg btn-block mt-4" type="button">Add Category</button>
       </div>;
 
     
@@ -204,21 +204,24 @@ function TransactionsForm(props) {
 
             <div className="col-md-4 mb-3">
               <label htmlFor="Amount">Amount</label>
-              <div className="input-group">
-                <input onChange={changeHandler} type="number" className={valid.amountValid? 'form-control': "form-control invalid"} maxLength={10} id="Amount" value={state.amount}/>
-              </div>
+              <div className="input-group mb-2">
+                    <input onChange={changeHandler} type="number" className={valid.amountValid? 'form-control': "form-control invalid"} maxLength={10} id="Amount" value={state.amount}/>
+                    <div className="input-group-append">
+                        <div className="input-group-text">₪</div>
+                    </div>
+                </div>
             </div>
 
             <div className="col-md-4 mb-3">
               <label htmlFor="Description">Description <span className="text-muted">(Optional)</span></label>
-              <input onChange={changeHandler} type="test" className="form-control" id="Description" value={state.description}/>
+              <input onChange={changeHandler} type="text" className="form-control" id="Description" value={state.description}/>
 
             </div>
             <div className="row">
 
                   <div className="col-md-4 mb-3">
                       <label htmlFor="Category">Category</label>
-                      <select onChange={changeHandler} className={valid.categoryValid? "custom-select d-block w-100": "custom-select d-block w-100 invalid"} maxLength={50} id="Category" value={state.category}>
+                      <select onChange={changeHandler} className={valid.categoryValid? "form-select": "form-select invalid"} maxLength={50} id="Category" value={state.category}>
                         <option>Choose...</option>
                         {categories}
                       </select>         
