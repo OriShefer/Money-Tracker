@@ -28,7 +28,7 @@ function Sidebar(props) {
   {
     id: 4,
     title: 'Savings',
-    imgLink: 'img/expense.png',
+    imgLink: 'img/saving.png',
     link: '/add-saving',
 }
   ];
