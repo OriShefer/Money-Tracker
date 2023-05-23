@@ -15,16 +15,22 @@ function Sidebar(props) {
     },
   {
       id: 2,
-      title: 'Add Income',
+      title: 'Incomes',
       imgLink: 'img/income.png',
       link: '/add-income',
   },
   {
       id: 3,
-      title: 'Add Expense',
+      title: 'Expenses',
       imgLink: 'img/expense.png',
       link: '/add-expense',
-  }
+  },
+  {
+    id: 4,
+    title: 'Savings',
+    imgLink: 'img/saving.png',
+    link: '/add-saving',
+}
   ];
   
 

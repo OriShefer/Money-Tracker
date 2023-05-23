@@ -24,13 +24,13 @@ function TransactionsPage(props) {
   useEffect(() => {
     if(props.type === INCOME){
       getIncomeAmount();
-      setTitle("Add Income");
+      setTitle("Incomes");
       setTotalTitle("Total Incomes:");
     }
 
     if(props.type === EXPENSE){
       getExpenseAmount();
-      setTitle("Add Expense");
+      setTitle("Expenses");
       setTotalTitle("Total Expenses:");
     }
   

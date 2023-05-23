@@ -89,7 +89,7 @@ export const GlobalProvider = (props) => {
     }
 
     const getIncomeCategories =  async () => {
-        const response = await axios.get(`${BASE_URL}${INCOME}/get-income-categories`)
+        const response = await axios.get(`${BASE_URL}${CATEGORY}/get-income-categories`)
             .catch((err) =>{
                 setError(err.response.data.message)
             });
@@ -97,7 +97,7 @@ export const GlobalProvider = (props) => {
     }
 
     const getExpenseCategories =  async () => {
-        const response = await axios.get(`${BASE_URL}${EXPENSE}/get-expense-categories`)
+        const response = await axios.get(`${BASE_URL}${CATEGORY}/get-expense-categories`)
             .catch((err) =>{
                 setError(err.response.data.message)
             });
@@ -156,6 +156,40 @@ export const GlobalProvider = (props) => {
         setLastSavings(savings);
     }
 
+    const getAllSavings = async () => {
+      const response = await axios.get(`${BASE_URL}${SAVING}/get-all-savings`)
+      .catch((err) =>{
+          setError(err.response.data.message)
+      });
+      let savings = response.data.map((saving) => {
+          return ({
+              id: saving._id,
+              name: saving.name,
+              currentAmount: saving.currentAmount,
+              destinationAmount: saving.destinationAmount
+      });
+          
+      })
+
+      setLastSavings(savings);
+    }
+
+    const addSaving = async (body) => {
+      await axios.post(`${BASE_URL}${SAVING}/add-saving`,body)
+      .catch((err) =>{
+          setError(err.response.data.message)
+      });
+      
+    }
+
+    const updateSaving = async (body) => {
+      await axios.patch(`${BASE_URL}${SAVING}/update-saving`,body)
+      .catch((err) =>{
+          setError(err.response.data.message)
+      });
+      
+    }
+
 
 
 
@@ -197,7 +231,10 @@ export const GlobalProvider = (props) => {
             lastTransactions,
             addTransaction,
             getLastSavings,
+            getAllSavings,
             lastSavings,
+            addSaving,
+            updateSaving,
             setTextColor,
             INCOME,
             EXPENSE
