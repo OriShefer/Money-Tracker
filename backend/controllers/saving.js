@@ -49,7 +49,6 @@ exports.updateSaving = async (req, res) => {
         res.status(500).json({message: 'Server Error'})
     }
 
-    console.log(saving)
 }
 
 exports.getLastSavings = async (req, res) => {

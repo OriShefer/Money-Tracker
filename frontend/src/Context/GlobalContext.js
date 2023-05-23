@@ -174,6 +174,14 @@ export const GlobalProvider = (props) => {
       setLastSavings(savings);
     }
 
+    const addSaving = async (body) => {
+      await axios.post(`${BASE_URL}${SAVING}/add-saving`,body)
+      .catch((err) =>{
+          setError(err.response.data.message)
+      });
+      
+    }
+
     const updateSaving = async (body) => {
       await axios.patch(`${BASE_URL}${SAVING}/update-saving`,body)
       .catch((err) =>{
@@ -225,6 +233,7 @@ export const GlobalProvider = (props) => {
             getLastSavings,
             getAllSavings,
             lastSavings,
+            addSaving,
             updateSaving,
             setTextColor,
             INCOME,

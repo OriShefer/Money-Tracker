@@ -41,7 +41,7 @@ const intialState =
 
 function SavingForm() {
 
-    const {updateSaving,getAllSavings,lastSavings} = useGlobalContext()
+    const {updateSaving,addSaving,getAllSavings,lastSavings} = useGlobalContext()
 
     const [state, dispatch] = useReducer(reducer, intialState);
     
@@ -52,6 +52,7 @@ function SavingForm() {
     })
 
     const [addedSaving,setAddedSaving] = useState(false)
+    const [newSaving,setNewSaving] = useState(false)
 
     useEffect(() => {
         getAllSavings()
@@ -60,9 +61,15 @@ function SavingForm() {
     const changeHandler = (e) => {
       e.preventDefault()
 
+
       switch (e.target.id) {
         case 'Name':
-          dispatch({ type: 'changeName', payload: e.target.value})
+          if(e.target.value === 'ADD NEW SAVING'){
+            setNewSaving(true)
+            dispatch({ type: 'changeName', payload: ''})
+          }else{
+            dispatch({ type: 'changeName', payload: e.target.value})
+          }
           break;
           case 'Current':
             dispatch({ type: 'changeCurrent', payload: e.target.value})
@@ -76,6 +83,39 @@ function SavingForm() {
 
     }
 
+    const nameValidCheck = (name,currentAmount,destinationAmount) => {
+
+      let nameValid = true;
+      let currentAmountValid = true;
+      let destinationAmountValid = true;
+
+      if( name === 'Choose...'){
+        nameValid = false;
+      }
+
+      if(newSaving && (name === '' ||  lastSavings.find(saving => saving.name === name) !== undefined )){
+        nameValid = false
+      }
+
+      if(!currentAmount){
+        currentAmountValid = false;
+      }
+
+      if(!destinationAmountValid || destinationAmount <= currentAmount){
+        destinationAmountValid = false;
+      }
+
+
+      setValid({
+        nameValid: nameValid,
+        currentAmountValid: currentAmountValid,
+        destinationAmountValid: destinationAmountValid
+
+      })
+
+      return nameValid && currentAmountValid && destinationAmountValid
+    }
+
   
 
     const submitHandler = (e) => {
@@ -83,24 +123,33 @@ function SavingForm() {
 
       const [name,currentAmount,destinationAmount] = [e.target.Name.value,e.target.Current.value,e.target.Destination.value]
 
-      //lastSavings.find(saving => saving.name === name) === undefined
-        setValid({
-          nameValid: name !== 'Choose...'? true: false,
-          currentAmountValid: currentAmount? true: false,
-          destinationAmountValid: destinationAmount && destinationAmount > currentAmount? true: false
-
-        })
+      const formValid = nameValidCheck(name,currentAmount,destinationAmount)
+        
 
         moment.locale("en-il"); 
 
-        if(name !== 'Choose...' && currentAmount && destinationAmount && destinationAmount > currentAmount){
+        if(formValid){
           dispatch({ type: 'reset'})
-          updateSaving({
-            name: name,
-            currentAmount:currentAmount,
-            destinationAmount:destinationAmount
-          })
-          .then(() => setAddedSaving(prev =>!prev))
+          if(newSaving){
+            addSaving({
+              name: name,
+              currentAmount:currentAmount,
+              destinationAmount:destinationAmount
+            })
+            .then(() => {
+              setAddedSaving(prev =>!prev)
+              setNewSaving(false)
+            })
+
+          }else{
+            updateSaving({
+              name: name,
+              currentAmount:currentAmount,
+              destinationAmount:destinationAmount
+            })
+            .then(() => setAddedSaving(prev =>!prev))
+          }
+        
         }
     }
 
@@ -111,13 +160,15 @@ function SavingForm() {
           <form onSubmit={submitHandler}>
           <div className="col-md-4 mb-3">
                 <label htmlFor="Name">Name</label>
-                <select onChange={changeHandler} className={valid.nameValid? "form-select": "form-select invalid"} maxLength={20} id="Name" value={state.name}>
+                {!newSaving?<select onChange={changeHandler} className={valid.nameValid? "form-select": "form-select invalid"} maxLength={20} id="Name" value={state.name}>
                         <option>Choose...</option>
                         {lastSavings.map((saving) => (
                          <option key={saving.name}>{saving.name}</option>
                         ))}
+                        <option>ADD NEW SAVING</option>
+
                 </select>  
-                 {/* <input onChange={changeHandler} type="text" className={valid.nameValid? 'form-control': "form-control invalid"} maxLength={20} id="Name" value={state.name}/> */}
+                 :<input onChange={changeHandler} type="text" className={valid.nameValid? 'form-control': "form-control invalid"} maxLength={20} id="Name" value={state.name}/>}
             </div>
 
             <div className="col-md-4 mb-3">
