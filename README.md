@@ -12,7 +12,7 @@ kept here for saving project progress history before separation
 ## Installation
 you can clone the project to your computer:
 
-$ git clone https://github.com/yourusername/yourproject.git 
+$ git clone https://github.com/OriShefer/Money-Tracker.git
 $ cd Money-Tracker 
 $ npm install
 
