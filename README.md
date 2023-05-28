@@ -1,6 +1,6 @@
 # Money Tracker
 
-An app that helps you keep track of your budget (front and back seperated to other repositories for deployment needs)
+An app that helps you keep track of your budget (front and back seperated to other repositories for deployment needs)__
 kept here for saving project progress history before separation
 
 ## Table of Contents
